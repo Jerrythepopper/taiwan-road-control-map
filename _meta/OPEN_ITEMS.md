@@ -10,4 +10,4 @@
 - [ ] app.js resolveDataUrl：`?data=` 含斜線時未強制前綴 data/（低風險，靜態站）；順手修時改成只取 basename
 - [ ] status=ended 的事件仍顯示 ETA 行「時段未結構化」，屬噪音，略過即可
 - [x] 第三階段：repo https://github.com/Jerrythepopper/taiwan-road-control-map 已建、Pages 已上線 https://jerrythepopper.github.io/taiwan-road-control-map/ （2026-09-10 23:15）
-- [ ] 使用者自行 `gh secret set TDX_CLIENT_ID` / `TDX_CLIENT_SECRET` 後，手動觸發 update-data workflow 驗證一次成功
+- [x] Secrets 已設、update-data workflow 手動觸發成功（2026-09-10 23:18，run 34494699958）

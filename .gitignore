@@ -1,0 +1,11 @@
+.env
+__pycache__/
+*.pyc
+_proof/*.tmp
+site/keys.js
+.venv/
+scripts/raw/
+backups/
+_proof/
+site/backups/
+reference/

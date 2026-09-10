@@ -1,0 +1,56 @@
+name: update-data
+on:
+  schedule:
+    - cron: "0 * * * *"      # 每小時（UTC）抓一次 TDX 快訊
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: update-data
+  cancel-in-progress: false
+
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -r scripts/requirements.txt
+      - name: Fetch events
+        env:
+          TDX_CLIENT_ID: ${{ secrets.TDX_CLIENT_ID }}
+          TDX_CLIENT_SECRET: ${{ secrets.TDX_CLIENT_SECRET }}
+        run: python scripts/fetch_events.py
+      - name: Commit if content changed (ignore generated_at only)
+        run: |
+          python - <<'PY'
+          import json, subprocess, sys
+          p = "site/data/events.geojson"
+          new = json.load(open(p, encoding="utf-8"))
+          try:
+              old = json.loads(subprocess.check_output(["git", "show", f"HEAD:{p}"]).decode("utf-8"))
+          except subprocess.CalledProcessError:
+              old = None
+          def strip(d):
+              if not d: return None
+              d = dict(d); d.pop("meta", None)
+              for f in d.get("features", []):
+                  f.get("properties", {}).pop("fetched_at", None)
+              return d
+          changed = strip(old) != strip(new)
+          open("changed.flag", "w").write("1" if changed else "0")
+          print("content changed:", changed)
+          PY
+          if [ "$(cat changed.flag)" = "1" ]; then
+            git config user.name "github-actions[bot]"
+            git config user.email "github-actions[bot]@users.noreply.github.com"
+            git add site/data/events.geojson
+            git commit -m "data: update events $(date -u +%Y-%m-%dT%H:%MZ)"
+            git push
+          else
+            git checkout -- site/data/events.geojson
+          fi

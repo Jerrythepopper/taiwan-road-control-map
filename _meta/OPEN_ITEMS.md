@@ -1,0 +1,12 @@
+# OPEN_ITEMS
+- [ ] 使用者確認 TDX 帳號是否可用、取得 client id/secret 放進 `.env`（使用者親自做）
+- [ ] TDX 省道事件 API 是否含座標：開工後第一個要實測的假設（見 research A1/架構影響 #5）
+- [ ] 骨架單截圖給使用者點頭後才派資料單
+- [ ] OSRM demo 水里→塔塔加 走台18 不走台21（OSM 可能把和社–塔塔加段標為不可通行）：資料單前確認 OSM 現況；必要時加「途經點」或改 ORS
+- [ ] 2026-09-10 verifier 誤用 `taskkill /F /IM chrome.exe`，可能關掉使用者的 Chrome；之後驗收單禁區加「不得 taskkill 全域瀏覽器行程，headless 用獨立 --user-data-dir 與 --remote-debugging-port 自行關閉」
+- [ ] parse_news：「封閉外側車道」類車道封閉被判 closure（NewsID 79329），應加「車道」→ construction 規則；「例假日不管制」「中午不管制」例外未進 rules[]
+- [ ] tw21 折線終點 144K+300 < 塔塔加官方 145K+035，尾端 735 m 被 clamp；可考慮延伸折線到 台18 終點交會處
+- [ ] TDX News 無深連結，source_url 目前退回 168 首頁；找公路局公告的可連結 URL 模式
+- [ ] app.js resolveDataUrl：`?data=` 含斜線時未強制前綴 data/（低風險，靜態站）；順手修時改成只取 basename
+- [ ] status=ended 的事件仍顯示 ETA 行「時段未結構化」，屬噪音，略過即可
+- [ ] 第三階段：GitHub 化（repo、Pages、Actions cron 每小時跑 fetch_events.py、保活 commit、TDX secret 放 GitHub Secrets）——等使用者提供 GitHub 帳號/repo 名

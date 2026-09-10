@@ -25,6 +25,10 @@ window.APP_CONFIG = {
   // 可用網址參數覆寫測試用資料：?data=sample-events-v2.geojson
   dataUrl: 'data/events.geojson',
 
+  // 政府行政機關辦公日曆表（SPEC §9d）：例假日／補行上班日判定用，由 scripts/build_holidays.py 產生。
+  // 載入失敗時前端退回「只算週六日」並在 ⓘ 面板標示。可用 ?holidays=sample-holidays.json 覆寫。
+  holidaysUrl: 'data/holidays.json',
+
   // 省道里程折線（SPEC §7d）：事件里程內插與台21 拼接路線都讀這兩份
   roadLines: {
     tw18: 'data/roads/tw18.geojson',

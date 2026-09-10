@@ -1,16 +1,16 @@
 {
   "type": "FeatureCollection",
   "meta": {
-    "generated_at": "2026-09-10T22:53:08+08:00",
+    "generated_at": "2026-09-10T23:36:16+08:00",
     "sources": [
       {
         "name": "TDX 路況資訊v2 Live/News/Highway",
-        "fetched_at": "2026-09-10T22:53:07+08:00",
+        "fetched_at": "2026-09-10T23:36:16+08:00",
         "count": 21
       },
       {
         "name": "scripts/manual_rules.json（人工維護常態規則）",
-        "fetched_at": "2026-09-10T22:53:07+08:00",
+        "fetched_at": "2026-09-10T23:36:16+08:00",
         "count": 1
       }
     ]
@@ -24,19 +24,19 @@
         "direction": "雙向",
         "from_km": "35K+200",
         "to_km": "35K+200",
-        "type": "timed",
+        "type": "construction",
         "status": "active",
         "title": "台18線雙向35K+200防落石網鑽設作業",
         "summary": "台18線雙向35K+200防落石網鑽設作業",
         "description": "台18線雙向35K+200防落石網鑽設作業，自115年8月25日起至115年10月9日止，每日7時至17時，採單線雙向管制通行，敬請用路人配合交管人員指揮，造成用路人不便，尚祈見諒。",
-        "schedule": "每日 07:00–17:00，單線雙向管制通行",
+        "schedule": "每日 07:00–17:00，採單線雙向管制通行",
         "rules": [
           {
             "days": "daily",
             "from": "07:00",
             "to": "17:00",
-            "effect": "release",
-            "note": "單線雙向管制通行"
+            "effect": "lane",
+            "note": "採單線雙向管制通行"
           }
         ],
         "start_date": "2026-08-25",
@@ -46,7 +46,7 @@
         "news_category": 4,
         "parse_warnings": [],
         "id": "717290968a03",
-        "fetched_at": "2026-09-10T22:53:07+08:00",
+        "fetched_at": "2026-09-10T23:36:16+08:00",
         "geom_precision": "route-interp"
       },
       "geometry": {
@@ -75,19 +75,19 @@
         "direction": "雙向",
         "from_km": "35K+800",
         "to_km": "35K+800",
-        "type": "timed",
+        "type": "construction",
         "status": "active",
         "title": "台18線西向35K+800邊坡刷坡作業",
         "summary": "台18線西向35K+800邊坡刷坡作業",
         "description": "台18線西向35K+800邊坡刷坡作業，自115年8月25日起至115年10月22日止，每日7時至17時，施工期間採單線雙向管制通行，請用路人配合交管人員指揮，造成用路人不便，尚祈見諒。",
-        "schedule": "每日 07:00–17:00，單線雙向管制通行",
+        "schedule": "每日 07:00–17:00，施工期間採單線雙向管制通行",
         "rules": [
           {
             "days": "daily",
             "from": "07:00",
             "to": "17:00",
-            "effect": "release",
-            "note": "單線雙向管制通行"
+            "effect": "lane",
+            "note": "施工期間採單線雙向管制通行"
           }
         ],
         "start_date": "2026-08-25",
@@ -97,7 +97,7 @@
         "news_category": 4,
         "parse_warnings": [],
         "id": "5fb81aed2989",
-        "fetched_at": "2026-09-10T22:53:07+08:00",
+        "fetched_at": "2026-09-10T23:36:16+08:00",
         "geom_precision": "route-interp"
       },
       "geometry": {
@@ -126,19 +126,19 @@
         "direction": "雙向",
         "from_km": "38K+560",
         "to_km": "38K+780",
-        "type": "timed",
+        "type": "construction",
         "status": "active",
         "title": "台18線雙向38K+560至38K+780彎道路坡改善作業",
         "summary": "台18線雙向38K+560至38K+780彎道路坡改善作業",
         "description": "台18線雙向38K+560至38K+780彎道路坡改善作業，自115年8月10日起至115年12月6日止，每日7時至17時，採單線雙向管制通行，請用路人行經施工路段時減速慢行，配合交管人員指揮，造成用路人不便，尚祈見諒。",
-        "schedule": "每日 07:00–17:00，單線雙向管制通行",
+        "schedule": "每日 07:00–17:00，採單線雙向管制通行",
         "rules": [
           {
             "days": "daily",
             "from": "07:00",
             "to": "17:00",
-            "effect": "release",
-            "note": "單線雙向管制通行"
+            "effect": "lane",
+            "note": "採單線雙向管制通行"
           }
         ],
         "start_date": "2026-08-10",
@@ -148,7 +148,7 @@
         "news_category": 4,
         "parse_warnings": [],
         "id": "2b3ba2fae793",
-        "fetched_at": "2026-09-10T22:53:07+08:00",
+        "fetched_at": "2026-09-10T23:36:16+08:00",
         "geom_precision": "route-interp"
       },
       "geometry": {
@@ -203,7 +203,7 @@
         "news_category": 4,
         "parse_warnings": [],
         "id": "9e16049cdef1",
-        "fetched_at": "2026-09-10T22:53:07+08:00",
+        "fetched_at": "2026-09-10T23:36:16+08:00",
         "geom_precision": "route-interp"
       },
       "geometry": {
@@ -272,19 +272,19 @@
         "direction": "雙向",
         "from_km": "42K+500",
         "to_km": "44K+600",
-        "type": "timed",
+        "type": "construction",
         "status": "active",
         "title": "台18線雙向42K+500至44K+600橫向排水鑽設作業",
         "summary": "台18線雙向42K+500至44K+600橫向排水鑽設作業",
         "description": "台18線雙向42K+500至44K+600橫向排水鑽設作業，自115年8月25日起至115年10月9日止，每日7時至17時，採單線雙向管制通行，敬請用路人配合交管人員指揮，造成用路人不便，尚祈見諒。",
-        "schedule": "每日 07:00–17:00，單線雙向管制通行",
+        "schedule": "每日 07:00–17:00，採單線雙向管制通行",
         "rules": [
           {
             "days": "daily",
             "from": "07:00",
             "to": "17:00",
-            "effect": "release",
-            "note": "單線雙向管制通行"
+            "effect": "lane",
+            "note": "採單線雙向管制通行"
           }
         ],
         "start_date": "2026-08-25",
@@ -294,7 +294,7 @@
         "news_category": 4,
         "parse_warnings": [],
         "id": "5c99a7dbefe2",
-        "fetched_at": "2026-09-10T22:53:07+08:00",
+        "fetched_at": "2026-09-10T23:36:16+08:00",
         "geom_precision": "route-interp"
       },
       "geometry": {
@@ -413,7 +413,7 @@
         "news_category": 4,
         "parse_warnings": [],
         "id": "14f86e53b2ac",
-        "fetched_at": "2026-09-10T22:53:07+08:00",
+        "fetched_at": "2026-09-10T23:36:16+08:00",
         "geom_precision": "route-interp"
       },
       "geometry": {
@@ -500,7 +500,7 @@
         "news_category": 4,
         "parse_warnings": [],
         "id": "081624125f91",
-        "fetched_at": "2026-09-10T22:53:07+08:00",
+        "fetched_at": "2026-09-10T23:36:16+08:00",
         "geom_precision": "route-interp"
       },
       "geometry": {
@@ -547,7 +547,7 @@
         "news_category": 4,
         "parse_warnings": [],
         "id": "1b6c269169da",
-        "fetched_at": "2026-09-10T22:53:07+08:00",
+        "fetched_at": "2026-09-10T23:36:16+08:00",
         "geom_precision": "route-interp"
       },
       "geometry": {
@@ -618,7 +618,7 @@
         "news_category": 4,
         "parse_warnings": [],
         "id": "6b3efea03560",
-        "fetched_at": "2026-09-10T22:53:07+08:00",
+        "fetched_at": "2026-09-10T23:36:16+08:00",
         "geom_precision": "route-interp"
       },
       "geometry": {
@@ -669,7 +669,7 @@
         "news_category": 4,
         "parse_warnings": [],
         "id": "600f760b816a",
-        "fetched_at": "2026-09-10T22:53:07+08:00",
+        "fetched_at": "2026-09-10T23:36:16+08:00",
         "geom_precision": "route-interp"
       },
       "geometry": {
@@ -1010,19 +1010,19 @@
         "direction": "雙向",
         "from_km": "70K+090",
         "to_km": "70K+450",
-        "type": "timed",
+        "type": "construction",
         "status": "active",
         "title": "台18線雙向70K+090至70K+450 明隧道修復工程",
         "summary": "台18線雙向70K+090至70K+450 明隧道修復工程",
         "description": "台18線雙向70K+090至70K+450 明隧道修復工程，自115年3月19日起至116年5月4日止，每日8時至17時，實施單線雙向輪放管制通行，請用路人行經該路段時，請依指示標誌及交管人員引導指揮減速慢行，以確保行車安全，造成不便尚祈見諒。",
-        "schedule": "每日 08:00–17:00，單線雙向輪放管制通行",
+        "schedule": "每日 08:00–17:00，實施單線雙向輪放管制通行",
         "rules": [
           {
             "days": "daily",
             "from": "08:00",
             "to": "17:00",
-            "effect": "release",
-            "note": "單線雙向輪放管制通行"
+            "effect": "lane",
+            "note": "實施單線雙向輪放管制通行"
           }
         ],
         "start_date": "2026-03-19",
@@ -1032,7 +1032,7 @@
         "news_category": 4,
         "parse_warnings": [],
         "id": "109b153c592a",
-        "fetched_at": "2026-09-10T22:53:07+08:00",
+        "fetched_at": "2026-09-10T23:36:16+08:00",
         "geom_precision": "route-interp"
       },
       "geometry": {
@@ -1078,7 +1078,7 @@
         "title": "台18線雙向70K+100明隧道工程基礎及邊坡施工作業。",
         "summary": "台18線雙向70K+100明隧道工程基礎及邊坡施工作業",
         "description": "台18線雙向70K+100明隧道工程基礎及邊坡施工作業，自115年5月15日起至115年11月30日止，每日8時至17時，施工期間每20分鐘後放行1次(例假日不管制)，請用路人配合交管人員指揮，造成用路人不便，尚祈見諒。",
-        "schedule": "每日 08:00–17:00，每20分鐘後放行1次",
+        "schedule": "每日 08:00–17:00，每20分鐘後放行1次；例假日不管制",
         "rules": [
           {
             "days": "daily",
@@ -1086,6 +1086,15 @@
             "to": "17:00",
             "effect": "release",
             "note": "每20分鐘後放行1次"
+          },
+          {
+            "days": [
+              "holiday"
+            ],
+            "from": "00:00",
+            "to": "24:00",
+            "effect": "exempt",
+            "note": "例假日不管制"
           }
         ],
         "start_date": "2026-05-15",
@@ -1095,7 +1104,7 @@
         "news_category": 4,
         "parse_warnings": [],
         "id": "7c715a9a62ee",
-        "fetched_at": "2026-09-10T22:53:07+08:00",
+        "fetched_at": "2026-09-10T23:36:16+08:00",
         "geom_precision": "route-interp"
       },
       "geometry": {
@@ -1124,19 +1133,28 @@
         "direction": "雙向",
         "from_km": "11K+000",
         "to_km": "12K+000",
-        "type": "timed",
+        "type": "construction",
         "status": "scheduled",
         "title": "台21線雙向11K至12K新社路段，於全車道進行路面刨鋪作業。",
         "summary": "台21線雙向11K至12K新社路段",
         "description": "台21線雙向11K至12K新社路段，自115年9月14日至115年10月8日每日8時起至18時止，於全車道進行路面刨鋪作業，現場採單線機動管制通行，原則例假日不施工，請注意路況並小心駕駛。",
-        "schedule": "每日 08:00–18:00，單線機動管制通行",
+        "schedule": "每日 08:00–18:00，於全車道進行路面刨鋪作業；例假日不施工",
         "rules": [
           {
             "days": "daily",
             "from": "08:00",
             "to": "18:00",
-            "effect": "release",
-            "note": "單線機動管制通行"
+            "effect": "lane",
+            "note": "於全車道進行路面刨鋪作業"
+          },
+          {
+            "days": [
+              "holiday"
+            ],
+            "from": "00:00",
+            "to": "24:00",
+            "effect": "exempt",
+            "note": "例假日不施工"
           }
         ],
         "start_date": "2026-09-14",
@@ -1146,7 +1164,7 @@
         "news_category": 4,
         "parse_warnings": [],
         "id": "aad2e5e4a3db",
-        "fetched_at": "2026-09-10T22:53:07+08:00",
+        "fetched_at": "2026-09-10T23:36:16+08:00",
         "geom_precision": "route-interp"
       },
       "geometry": {
@@ -1221,7 +1239,7 @@
         "news_category": 4,
         "parse_warnings": [],
         "id": "400871d2bcd3",
-        "fetched_at": "2026-09-10T22:53:07+08:00",
+        "fetched_at": "2026-09-10T23:36:16+08:00",
         "geom_precision": "route-interp"
       },
       "geometry": {
@@ -1264,7 +1282,7 @@
         "news_category": 4,
         "parse_warnings": [],
         "id": "83969b11cdb2",
-        "fetched_at": "2026-09-10T22:53:07+08:00",
+        "fetched_at": "2026-09-10T23:36:16+08:00",
         "geom_precision": "route-interp"
       },
       "geometry": {
@@ -1319,7 +1337,7 @@
         "news_category": 1,
         "parse_warnings": [],
         "id": "d23a3534f110",
-        "fetched_at": "2026-09-10T22:53:07+08:00",
+        "fetched_at": "2026-09-10T23:36:16+08:00",
         "geom_precision": "route-interp"
       },
       "geometry": {
@@ -1352,19 +1370,19 @@
         "direction": "往山下",
         "from_km": "65K+740",
         "to_km": "65K+226",
-        "type": "closure",
+        "type": "construction",
         "status": "active",
         "title": "台21線北上65K+740至65K+226水社隧道路段，封閉外側車道進行管線更換工程。",
         "summary": "台21線北上65K+740至65K+226水社隧道路段",
         "description": "台21線北上65K+740至65K+226水社隧道路段，自115年9月9日至115年9月11日每日9時起至16時止，封閉外側車道進行管線更換工程，請注意路況並小心駕駛。",
-        "schedule": "每日 09:00–16:00",
+        "schedule": "每日 09:00–16:00，封閉外側車道進行管線更換工程",
         "rules": [
           {
             "days": "daily",
             "from": "09:00",
             "to": "16:00",
-            "effect": "closed",
-            "note": ""
+            "effect": "lane",
+            "note": "封閉外側車道進行管線更換工程"
           }
         ],
         "start_date": "2026-09-09",
@@ -1374,7 +1392,7 @@
         "news_category": 4,
         "parse_warnings": [],
         "id": "50d74ea901bd",
-        "fetched_at": "2026-09-10T22:53:07+08:00",
+        "fetched_at": "2026-09-10T23:36:16+08:00",
         "geom_precision": "route-interp"
       },
       "geometry": {
@@ -1419,7 +1437,7 @@
         "direction": "往山下",
         "from_km": "65K+740",
         "to_km": "65K+226",
-        "type": "closure",
+        "type": "construction",
         "status": "active",
         "title": "台21線北上65K+740至65K+226水社隧道路段，封閉外側車道進行管線更換工程。",
         "summary": "台21線北上65K+740至65K+226水社隧道路段",
@@ -1435,7 +1453,7 @@
           "id 與另一筆公告相同（同路線/里程/標題），已加後綴 -79469 區隔"
         ],
         "id": "50d74ea901bd-79469",
-        "fetched_at": "2026-09-10T22:53:07+08:00",
+        "fetched_at": "2026-09-10T23:36:16+08:00",
         "geom_precision": "route-interp"
       },
       "geometry": {
@@ -1494,7 +1512,7 @@
         "news_category": 4,
         "parse_warnings": [],
         "id": "89c70ee6355f",
-        "fetched_at": "2026-09-10T22:53:07+08:00",
+        "fetched_at": "2026-09-10T23:36:16+08:00",
         "geom_precision": "route-interp"
       },
       "geometry": {
@@ -1537,7 +1555,7 @@
         "news_category": 4,
         "parse_warnings": [],
         "id": "790f59c6b28f",
-        "fetched_at": "2026-09-10T22:53:07+08:00",
+        "fetched_at": "2026-09-10T23:36:16+08:00",
         "geom_precision": "route-interp"
       },
       "geometry": {
@@ -1588,13 +1606,11 @@
         "source_name": "公路局中區養護工程分局公告",
         "source_url": "https://thbu2.thb.gov.tw/News_Content_table.aspx?n=4437&sms=13364&s=215673",
         "last_verified": "2026-09-10",
-        "parse_warnings": [
-          "里程 145K+035 超過 台21線 折線終點 144K+300，已 clamp（segment 終點）"
-        ],
+        "parse_warnings": [],
         "source_id": "",
         "status": "active",
         "id": "52213d158ad9",
-        "fetched_at": "2026-09-10T22:53:07+08:00",
+        "fetched_at": "2026-09-10T23:36:16+08:00",
         "geom_precision": "route-interp"
       },
       "geometry": {
@@ -2925,20 +2941,52 @@
             23.49146
           ],
           [
-            120.891555,
-            23.490654
+            120.891564,
+            23.490674
           ],
           [
-            120.891269,
-            23.489801
+            120.891415,
+            23.490348
           ],
           [
-            120.891006,
-            23.488944
+            120.891323,
+            23.490026
           ],
           [
-            120.890396,
-            23.48825
+            120.891244,
+            23.489701
+          ],
+          [
+            120.891166,
+            23.489376
+          ],
+          [
+            120.891067,
+            23.489056
+          ],
+          [
+            120.890863,
+            23.488784
+          ],
+          [
+            120.890625,
+            23.488534
+          ],
+          [
+            120.890408,
+            23.488269
+          ],
+          [
+            120.890364,
+            23.487946
+          ],
+          [
+            120.890373,
+            23.487614
+          ],
+          [
+            120.890341,
+            23.487502
           ]
         ]
       }
@@ -2956,7 +3004,7 @@
         "title": "台21線雙向132K+300和社二號明隧道路段，於全車道進行新建明隧道工程。",
         "summary": "台21線雙向132K+300和社二號明隧道路段",
         "description": "台21線雙向132K+300和社二號明隧道路段，自115年1月20日至115年11月15日每日8時起至17時止，於全車道進行新建明隧道工程，每周一至周日封閉採整點放行10分鐘管制，連續假期維持單線雙向管制通行，中午12時至13時不管制，請用路人依交維管制措施行駛並小心駕駛。",
-        "schedule": "每日 08:00–17:00，採整點放行10分鐘",
+        "schedule": "每日 08:00–17:00，採整點放行10分鐘；中午12時至13時不管制",
         "rules": [
           {
             "days": "daily",
@@ -2964,6 +3012,13 @@
             "to": "17:00",
             "effect": "release",
             "note": "採整點放行10分鐘"
+          },
+          {
+            "days": "daily",
+            "from": "12:00",
+            "to": "13:00",
+            "effect": "exempt",
+            "note": "中午12時至13時不管制"
           }
         ],
         "start_date": "2026-01-20",
@@ -2973,7 +3028,7 @@
         "news_category": 4,
         "parse_warnings": [],
         "id": "4a027115a62a",
-        "fetched_at": "2026-09-10T22:53:07+08:00",
+        "fetched_at": "2026-09-10T23:36:16+08:00",
         "geom_precision": "route-interp"
       },
       "geometry": {

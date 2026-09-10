@@ -53,11 +53,13 @@ SOURCE_NOTE = (
 ROADS = [
     {"code": "P0180", "csv_id": "台18", "name": "台18線", "out": "tw18.geojson",
      "desc": "阿里山公路（太保 – 塔塔加）"},
+    # 台21 官方終點樁號 145K+035（塔塔加），KML 的樁號範圍只到 144K+385 → 見 SPEC §9c
     {"code": "P0210", "csv_id": "台21", "name": "台21線", "out": "tw21.geojson",
-     "desc": "新中橫（天冷 – 塔塔加）"},
+     "desc": "新中橫（天冷 – 塔塔加）", "terminus_m": 145035},
 ]
 
 STEP_M = 100  # 重採樣間距（公尺）
+TERMINUS_TOL_M = 150.0  # SPEC §9c 規則 4：兩條路線終點距離 / 終點樁號推估容差（公尺）
 
 # WGS84 <-> TWD97 TM2 (EPSG:3826)
 TO_TM = Transformer.from_crs("EPSG:4326", "EPSG:3826", always_xy=True)
@@ -312,6 +314,109 @@ def nearest_on_polyline(xy, mil, pts):
     return dists, mils
 
 
+def dist_along(xy, i_from=None):
+    """折線各頂點的累積長度（同 cumulative，語意化別名）。"""
+    return cumulative(xy)
+
+
+def align_terminus(road, xy, mil, mps):
+    """SPEC §9c：把折線末端里程對齊官方終點樁號。
+
+    決策規則（SPEC §9c 1–4）：
+      1. 取該路線樁號最大的幾支里程牌，求它們到折線的最近點與該點目前指派里程；
+      2. 若里程牌顯示折線末端實際對應 ≈ 官方終點 → **重指派**（幾何不動）；
+      3. 若里程牌顯示折線末端確實短少 → **延伸幾何**；
+      4. 兩條路線終點距離 ≤ 150 m 為驗收。
+
+    回傳 (new_mil, info dict)；不需處理的路線回傳原 mil 與 info=None。
+    """
+    official = road.get("terminus_m")
+    if not official:
+        return mil, None
+
+    rid = road["csv_id"]
+    all_mp = mps.get(rid, [])
+    # 規則 1：先取 ≥ 官方終點 −1 km 的里程牌；不足 3 支就放寬到 −5 km
+    picks = [p for p in all_mp if p["station_m"] >= official - 1000]
+    widened = False
+    if len(picks) < 3:
+        picks = [p for p in all_mp if p["station_m"] >= official - 5000]
+        widened = True
+    if not picks:
+        return mil, {"branch": 0, "reason": "找不到可用里程牌，維持原里程指派"}
+
+    mp_xy = to_tm([(p["lon"], p["lat"]) for p in picks])
+    d_near, s_near = nearest_on_polyline(xy, mil, mp_xy)
+
+    cum = cumulative(xy)
+    # 錨點＝樁號最大的那支牌（picks 已排序）
+    anchor = picks[-1]
+    anchor_station = float(anchor["station_m"])
+    anchor_mil = float(s_near[-1])
+    # 錨點在折線上的累積長度：用里程→累積長度的內插（mil 已單調）
+    anchor_cum = float(np.interp(anchor_mil, mil, cum))
+    tail_len = float(cum[-1] - anchor_cum)
+    # 由里程牌推估的「折線末端實際樁號」
+    est_end_station = anchor_station + tail_len
+
+    info = {
+        "picks": [(p["station_m"], float(dd), float(ss))
+                  for p, dd, ss in zip(picks, d_near, s_near)],
+        "widened": widened,
+        "anchor_station": anchor_station,
+        "anchor_mil": anchor_mil,
+        "tail_len": tail_len,
+        "est_end_station": est_end_station,
+        "old_end_m": float(mil[-1]),
+        "official": float(official),
+    }
+
+    if abs(est_end_station - official) <= TERMINUS_TOL_M:
+        info["branch"] = 2
+        info["reason"] = ("里程牌推估折線末端實際樁號 %.0f m，與官方終點 %d m 相差 %.0f m（≤ %.0f m），"
+                          "屬「最後一段里程被低估」→ 重指派、幾何不動"
+                          % (est_end_station, official, est_end_station - official, TERMINUS_TOL_M))
+    else:
+        info["branch"] = 3
+        info["reason"] = ("里程牌推估折線末端實際樁號 %.0f m，距官方終點 %d m 還差 %.0f m，"
+                          "折線末端確實短少" % (est_end_station, official, official - est_end_station))
+
+    # 規則 3 的前提是「道路實體還有一段沒被畫進來」。本專案兩條路線都收在塔塔加，
+    # 若本線末端已經和另一條線末端重合，就沒有實體可延伸；此時改走規則 2（見報告）。
+    other_end = road.get("_other_end_xy")
+    if info["branch"] == 3 and other_end is not None:
+        d_ends = float(np.hypot(*(xy[-1] - other_end)))
+        info["d_other_end"] = d_ends
+        if d_ends < official - est_end_station:
+            info["branch"] = 2
+            info["reason"] += ("；但本線末端距另一條路線末端僅 %.1f m（兩線同收於塔塔加），"
+                               "沒有實體路段可延伸 %.0f m，故改走規則 2（重指派、幾何不動），"
+                               "以符合規則 4「兩條路線終點距離 ≤ 150 m」"
+                               % (d_ends, official - est_end_station))
+
+    if info["branch"] != 2:
+        return mil, info
+
+    # --- 規則 2：重指派 -------------------------------------------------
+    # SPEC 原文是「最後一個工務段的終點里程改為 145035，段內線性重算」。
+    # 實作上把重算範圍縮到「最後一支里程牌之後」：整段（68K–144K）線性重算會把
+    # 段內每一點往前推最多 +650 m，破壞既有里程牌誤差（中位 ~10 m）；把差額放在
+    # 最後一支已驗證里程牌之後，等同把官方里程斷鏈記在末端，其餘里程不動。
+    new_mil = mil.copy().astype(float)
+    tail = cum > anchor_cum
+    if tail.sum() == 0 or cum[-1] <= anchor_cum:
+        info["applied"] = False
+        return mil, info
+    scale = (official - anchor_mil) / (cum[-1] - anchor_cum)
+    new_mil[tail] = anchor_mil + (cum[tail] - anchor_cum) * scale
+    new_mil = np.maximum.accumulate(new_mil)
+    info["applied"] = True
+    info["anchor_cum"] = anchor_cum
+    info["scale"] = float(scale)
+    info["new_end_m"] = float(new_mil[-1])
+    return new_mil, info
+
+
 def linfit(s, m):
     """最小平方擬合 m = a*s + b，回傳 (a, b)。"""
     s = np.asarray(s, dtype=float)
@@ -328,6 +433,10 @@ def linfit(s, m):
 # ---------------------------------------------------------------- main
 
 def main():
+    try:  # Windows 主控台預設 cp950，報告文字含「≤」等字元會炸
+        sys.stdout.reconfigure(encoding="utf-8")
+    except Exception:
+        pass
     os.makedirs(OUT_DIR, exist_ok=True)
     built_at = datetime.now(timezone.utc).astimezone().isoformat(timespec="seconds")
     mileposts = load_mileposts()
@@ -383,14 +492,40 @@ def main():
 
     summary_rows = []
 
+    prev_end_xy = None
+    terminus_infos = []
+    out_ends = {}
+
     for road in ROADS:
         kml = read_inner_kmz(road["code"])
         segs = parse_kml_segments(kml)
         xy, mil, diag = build_polyline(segs)
+
+        # ---- SPEC §9c：終點樁號對齊（只有設了 terminus_m 的路線會動）
+        road["_other_end_xy"] = prev_end_xy
+        mil, term_info = align_terminus(road, xy, mil, mileposts)
+        if term_info:
+            term_info["road"] = road["name"]
+            terminus_infos.append(term_info)
+            log("[%s] §9c 終點對齊：走規則 %d — %s"
+                % (road["name"], term_info["branch"], term_info["reason"]))
+
         lonlat, stations = resample(xy, mil)
 
         # ---- 輸出 GeoJSON
         coords = [[round(float(lo), 6), round(float(la), 6)] for lo, la in lonlat]
+        stations = [int(s) for s in stations]
+        terminus_note = ""
+        if term_info and term_info.get("applied") and stations[-1] < int(term_info["official"]):
+            # 重採樣落在 100 m 網格上（末點 145000），補一個「官方終點樁號」頂點，
+            # 讓 145K+035 這類事件里程不會被 roadgeom 的 clamp 警告擋掉（SPEC §9c 末條）。
+            end_lon, end_lat = TO_WGS.transform(xy[-1, 0], xy[-1, 1])
+            coords.append([round(float(end_lon), 6), round(float(end_lat), 6)])
+            stations.append(int(term_info["official"]))
+            terminus_note = ("末頂點為官方終點樁號 %s（SPEC §9c 規則 %d 重指派），"
+                             "與前一頂點間距 %d m"
+                             % (fmt_station(int(term_info["official"])), term_info["branch"],
+                                stations[-1] - stations[-2]))
         feature = {
             "type": "Feature",
             "properties": {
@@ -405,6 +540,10 @@ def main():
             },
             "geometry": {"type": "LineString", "coordinates": coords},
         }
+        if terminus_note:
+            feature["properties"]["terminus_note"] = terminus_note
+        out_ends[road["name"]] = (coords[-1], stations[-1])
+        prev_end_xy = xy[-1]
         gj = {"type": "FeatureCollection", "features": [feature]}
         out_path = os.path.join(OUT_DIR, road["out"])
         with open(out_path, "w", encoding="utf-8") as f:
@@ -579,6 +718,61 @@ def main():
     head.append("")
     report = report[:report.index("## %s（%s）" % (ROADS[0]["name"], ROADS[0]["desc"]))] \
         + head + report[report.index("## %s（%s）" % (ROADS[0]["name"], ROADS[0]["desc"])):]
+
+    # ---- SPEC §9c 終點對齊小節（附在報告末尾）
+    report.append("## SPEC §9c 台21 終點對齊 145K+035")
+    report.append("")
+    if not terminus_infos:
+        report.append("本次執行沒有任何路線設定 `terminus_m`，未做終點對齊。")
+        report.append("")
+    for info in terminus_infos:
+        report.append("### %s" % info["road"])
+        report.append("")
+        report.append("**走規則 %d**。%s" % (info["branch"], info["reason"]))
+        report.append("")
+        report.append("規則 1 取樣的里程牌（%s）：" % (
+            "官方終點前 5 km 內（前 1 km 內不足 3 支）" if info.get("widened")
+            else "官方終點前 1 km 內"))
+        report.append("")
+        report.append("| 里程牌樁號 | 到折線最近距離 | 折線該點原指派里程 | 里程偏移 |")
+        report.append("|---|---:|---:|---:|")
+        for st, dd, ss in info["picks"]:
+            report.append("| %s | %.1f m | %.0f m | %+.0f m |" % (fmt_station(int(st)), dd, ss, ss - st))
+        report.append("")
+        report.append("- 錨點（樁號最大的里程牌）：%s，其後折線還有 **%.1f m**，"
+                      "推估折線末端實際樁號 **%.0f m**；原折線末端里程 %.0f m、官方終點 %d m。"
+                      % (fmt_station(int(info["anchor_station"])), info["tail_len"],
+                         info["est_end_station"], info["old_end_m"], int(info["official"])))
+        if "d_other_end" in info:
+            report.append("- 本線末端到另一條路線（台18線）末端：**%.1f m**（兩線同收於塔塔加）。"
+                          % info["d_other_end"])
+        if info.get("applied"):
+            report.append("- 重指派：錨點之後的 %.1f m 幾何，里程由 %.0f m 線性拉伸到 %d m"
+                          "（比例 %.3f m/m）；錨點之前的里程完全不動，幾何完全不動。"
+                          % (info["tail_len"], info["anchor_mil"], int(info["official"]),
+                             info["scale"]))
+            report.append("- 這等同把官方里程斷鏈記在最後一支已驗證里程牌之後。"
+                          "SPEC 原文寫的是「最後一個工務段的終點里程改為 145035，段內線性重算」，"
+                          "但那會把 68K–144K 段內每一點往前推最多 +650 m、破壞既有里程牌誤差"
+                          "（中位 ~10 m），故縮小重算範圍。")
+        report.append("")
+    if len(out_ends) >= 2:
+        names = list(out_ends.keys())
+        (c1, m1), (c2, m2) = out_ends[names[0]], out_ends[names[1]]
+        p = to_tm([tuple(c1), tuple(c2)])
+        d_end = float(np.hypot(*(p[0] - p[1])))
+        report.append("### 規則 4 驗收：兩條路線終點距離")
+        report.append("")
+        report.append("| 路線 | 末頂點里程 | 末頂點座標 |")
+        report.append("|---|---:|---|")
+        report.append("| %s | %s | %.6f, %.6f |" % (names[0], fmt_station(int(m1)), c1[0], c1[1]))
+        report.append("| %s | %s | %.6f, %.6f |" % (names[1], fmt_station(int(m2)), c2[0], c2[1]))
+        report.append("")
+        report.append("**兩線終點距離 = %.1f m**（門檻 %.0f m → %s）"
+                      % (d_end, TERMINUS_TOL_M, "PASS" if d_end <= TERMINUS_TOL_M else "FAIL"))
+        report.append("")
+        log("§9c 規則 4：兩條路線終點距離 %.1f m（門檻 %.0f m）→ %s"
+            % (d_end, TERMINUS_TOL_M, "PASS" if d_end <= TERMINUS_TOL_M else "FAIL"))
 
     with open(REPORT, "w", encoding="utf-8") as f:
         f.write("\n".join(report) + "\n")

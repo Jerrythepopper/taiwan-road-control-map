@@ -146,3 +146,36 @@ FeatureCollection；每個 Feature 為 `Point`（第一版；第二階段可能�
 - 含 manual_rules 的台21 夜間封閉（110K+900–145K+035）且 rules 為跨午夜 closed 17:30–07:00。
 - 台18 至少 5 筆成功解析出里程。
 - 不含任何 token/secret；`.env` 未動。
+
+## 9. 小毛病修正批次（2026-09-10 23:25 使用者定案：四項）
+
+### 9a. 車道封閉 ≠ 道路封閉
+- `parse_news.detect_type`：文字含「車道」「外側」「內側」「單線雙向」「縮減」→ `construction`，**除非**同時含「全線封閉」「道路封閉」「禁止通行」（後者優先 closure）。
+- 車道類的時段規則 `effect` 用新值 **`"lane"`**（可通行但車道縮減），不再產生 `closed`。
+- 前端 `evaluateRules` 新增 state `lane`：顯示「車道管制中（HH:MM–HH:MM）」，顏色 `--blue`；摘要「會遇到 N 筆管制」**不計** lane。
+
+### 9b. 已解除事件不顯示 ETA 行
+- `status === "ended"` 的事件：卡片與 popup 都不顯示「預計 … 經過」行；不計入摘要。
+
+### 9c. 台21 折線終點對齊 145K+035
+- 事實：`tw21.geojson` 末頂點 mileage 144300，與 `tw18` 末端相距約 120 m（兩者都收在塔塔加），但官方台21 終點樁號 145K+035。
+- 決策規則（`build_roads.py` 內實作，報告寫明走哪條）：
+  1. 取 7040 里程牌 CSV 中台21 樁號最大的幾支（≥144K），算它們到折線的最近點與該點的目前指派里程；
+  2. 若里程牌顯示折線末端實際對應 ≈145K（即最後一段里程被低估）→ **重指派**：最後一個工務段的終點里程改為 145035，段內線性重算（幾何不動）；
+  3. 若里程牌顯示折線末端確實只到 ≈144.3K（道路實體還有 700 m）→ **延伸幾何**：沿 tw18 末端方向接到 tw18 終點，再延伸至 145035 所需長度（直線），每 100 m 補點；
+  4. 兩條路線終點距離 ≤ 150 m 為驗收。
+- 重跑後 `fetch_events.py` 不得再出現「145K+035 已 clamp」警告。
+
+### 9d. 例外時段與例假日
+- `rules[]` 新增 `effect: "exempt"`（該時段**不受**本事件其他規則約束）。`days` 可含 token `"holiday"`＝週六、週日與國定假日，且**排除補行上班日**；也可為 `["mon",…,"fri"]` 等。
+- 解析（`parse_news`）：
+  - 「例假日不管制|例假日不施工|假日不管制|假日暫停施工|例假日暫停」→ `{days:["holiday"], from:"00:00", to:"24:00", effect:"exempt", note:原文片段}`
+  - 「(中午)?(\d{1,2})[:：時](\d{2})?(分)?[至到~－-](\d{1,2})[:：時](\d{2})?(分)?不管制|開放通行|暫停管制」→ `{days:"daily", from, to, effect:"exempt"}`
+  - 「週一至週五|平日」出現在管制句 → 該 closed/release/lane 規則 `days:["mon","tue","wed","thu","fri"]`。
+- 假日資料：`scripts/build_holidays.py` 從政府資料開放平台「中華民國政府行政機關辦公日曆表」（data.gov.tw 資料集 id 14718，CSV，含「是否放假」與「備註」如「補行上班」）產出 `site/data/holidays.json`：`{"holidays": ["2026-01-01", …], "workdays": ["2026-02-07", …], "source": url, "years": [2026, 2027], "built_at": iso}`。找不到明年資料就只放今年並在 `years` 反映。
+- 前端：載入 `holidays.json`（失敗則退回只算週六日並在 ⓘ 顯示警告）。`isHoliday(date)`：在 `workdays` → false；在 `holidays` → true；週六日 → true；否則 false。`evaluateRules` 順序：先看 exempt（命中→ `open`，note 顯示「例假日不管制」或「12:00–13:00 不管制」）→ 再看 closed → release → lane → 都沒命中 → `open`；無任何規則 → `unknown`。
+- 跨午夜 exempt 同樣支援 `to < from`。
+
+### 9e. 驗收共通
+- `test_fetch_events.py` 加案例：79329「封閉外側車道」→ type construction 且 rules 無 closed；含「例假日不施工」的公告 → 有 exempt/holiday 規則；台21 夜間封閉仍為 closed 17:30–07:00。
+- 前端 `evaluateRules` 自測加案例：例假日（用 holidays.json 內某假日）於 closed 時段但有 holiday exempt → open；補行上班日同條件 → closed；lane 規則 → lane；ended 事件無 ETA 行。

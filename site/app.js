@@ -16,13 +16,17 @@
   var VERDICT = {
     closed:  { label: '封閉中',       cls: 'closure' },
     release: { label: '時段放行',     cls: 'timed' },
+    lane:    { label: '車道管制中',   cls: 'construction' }, // SPEC §9a：可通行但車道縮減 → --blue
     open:    { label: '不在管制時段', cls: 'accent' },
     unknown: { label: '時段未結構化', cls: 'muted' }
   };
+  // 摘要「會遇到 N 筆管制」只算這些（SPEC §9a：不計 lane；§9b：不計 ended）
+  var COUNTED_VERDICTS = ['closed', 'release'];
   var DOW = ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'];
 
   var state = {
     events: [],
+    holidays: null,       // { holidays:{isoDate:1}, workdays:{isoDate:1}, years:[] }；null = 沒載到（SPEC §9d 退路）
     route: null,          // Feature<LineString>
     routeSecs: null,      // 與 route 幾何頂點對齊的累積秒數（SPEC §7a）
     routeDistance: 0,
@@ -128,44 +132,105 @@
     return h * 60 + mi;
   }
 
-  function dayMatches(days, dowIdx) {
+  function dateKey(d) {
+    return d.getFullYear() + '-' + pad2(d.getMonth() + 1) + '-' + pad2(d.getDate());
+  }
+
+  // SPEC §9d：在 workdays（補行上班日）→ false；在 holidays → true；否則週六日 → true。
+  // holidays.json 沒載到時只剩週六日判定（ⓘ 面板會標示）。
+  function isHoliday(d) {
+    var day = (typeof d === 'string') ? new Date(d) : d;
+    if (!day || isNaN(day)) return false;
+    var h = state.holidays;
+    if (h) {
+      var k = dateKey(day);
+      if (h.workdays[k]) return false;
+      if (h.holidays[k]) return true;
+    }
+    var w = day.getDay();
+    return w === 0 || w === 6;
+  }
+  window.isHoliday = isHoliday; // 驗收用
+
+  // days 可為 'daily' / ['mon','fri'] / ['holiday']（SPEC §9d）；d 是該規則「所屬那一天」的 Date
+  function dayMatches(days, d) {
     if (!days || days === 'daily' || days === 'all') return true;
     var list = Array.isArray(days) ? days : String(days).split(/[,\s]+/);
+    var dow = d.getDay();
     for (var i = 0; i < list.length; i++) {
-      var d = String(list[i]).toLowerCase().slice(0, 3);
-      if (d === 'dai' || d === 'all') return true;
-      if (d === DOW[dowIdx]) return true;
+      var tok = String(list[i]).toLowerCase().trim();
+      if (tok === 'daily' || tok === 'all') return true;
+      if (tok === 'holiday' || tok === 'holidays' || tok === '例假日') {
+        if (isHoliday(d)) return true;
+        continue;
+      }
+      if (tok === 'weekday' || tok === 'weekdays' || tok === '平日') {
+        if (!isHoliday(d)) return true;
+        continue;
+      }
+      if (tok.slice(0, 3) === DOW[dow]) return true;
     }
     return false;
   }
 
-  // rules: [{days, from:'HH:MM', to:'HH:MM', effect:'closed'|'release', note}]
-  // 回傳 { state: 'closed'|'release'|'open'|'unknown', rule }
-  function evaluateRules(rules, when) {
-    if (!rules || !rules.length || !when || isNaN(when)) return { state: 'unknown', rule: null };
+  var EFFECTS = ['exempt', 'closed', 'release', 'lane'];
+  function ruleEffect(r) {
+    var e = String(r && r.effect || '').toLowerCase();
+    return EFFECTS.indexOf(e) >= 0 ? e : 'release'; // 舊資料沒寫 effect 時比照 release（維持原行為）
+  }
+
+  // 單條規則是否命中 when；跨午夜（to < from）對所有 effect 一致處理，to:'24:00' 視為整日。
+  // 命中時回傳該規則「所屬那一天」的 Date（跨午夜的凌晨段算前一天），沒命中回 null。
+  function ruleHitDay(r, when) {
+    var f = hhmmToMin(r.from), t = hhmmToMin(r.to);
+    if (f === null || t === null) return null;
     var mins = when.getHours() * 60 + when.getMinutes();
-    var dow = when.getDay();
-    var releaseHit = null;
+    var inRange = false, shiftBack = false;
+    if (t > f) {
+      inRange = mins >= f && mins < t;   // to='24:00' → t=1440，整日成立
+    } else if (t < f) {
+      if (mins >= f) inRange = true;                        // from~24:00 屬當天
+      else if (mins < t) { inRange = true; shiftBack = true; } // 00:00~to 屬前一天那條規則
+    } else {
+      inRange = true;                     // from === to 視為全天
+    }
+    if (!inRange) return null;
+    var day = shiftBack ? new Date(when.getTime() - 86400000) : when;
+    return dayMatches(r.days, day) ? day : null;
+  }
+
+  function isAllDay(r) {
+    var f = hhmmToMin(r.from), t = hhmmToMin(r.to);
+    return f === t || (f === 0 && t === 1440);
+  }
+
+  // exempt 命中時給人看的說明（SPEC §9d：「例假日不管制」「12:00–13:00 不管制」）
+  function exemptNote(r) {
+    var days = Array.isArray(r.days) ? r.days.join(',').toLowerCase() : String(r.days || '').toLowerCase();
+    var isHolidayRule = days.indexOf('holiday') >= 0 || days.indexOf('例假日') >= 0;
+    var head = isHolidayRule ? '例假日' : '';
+    var span = isAllDay(r) ? '' : (r.from + '–' + r.to + ' ');
+    if (!head && !span) return '不管制';
+    return head + (head && span ? ' ' : '') + span + '不管制';
+  }
+
+  // rules: [{days, from:'HH:MM', to:'HH:MM', effect:'exempt'|'closed'|'release'|'lane', note}]
+  // 判定順序（SPEC §9d）：exempt → closed → release → lane → 都沒命中 open；完全沒規則 unknown。
+  // 回傳 { state:'closed'|'release'|'lane'|'open'|'unknown', rule, note }
+  function evaluateRules(rules, when) {
+    if (!rules || !rules.length || !when || isNaN(when)) return { state: 'unknown', rule: null, note: '' };
+    var hits = { exempt: null, closed: null, release: null, lane: null };
     for (var i = 0; i < rules.length; i++) {
       var r = rules[i] || {};
-      var f = hhmmToMin(r.from), t = hhmmToMin(r.to);
-      if (f === null || t === null) continue;
-      var inRange = false, ruleDow = dow;
-      if (t > f) {
-        inRange = mins >= f && mins < t;
-      } else if (t < f) {
-        // 跨午夜：from~24:00 屬當天、00:00~to 屬前一天那條規則
-        if (mins >= f) { inRange = true; }
-        else if (mins < t) { inRange = true; ruleDow = (dow + 6) % 7; }
-      } else {
-        inRange = true; // from === to 視為全天
-      }
-      if (!inRange || !dayMatches(r.days, ruleDow)) continue;
-      if (r.effect === 'closed') return { state: 'closed', rule: r };
-      if (!releaseHit) releaseHit = r;
+      var eff = ruleEffect(r);
+      if (hits[eff]) continue;
+      if (ruleHitDay(r, when)) hits[eff] = r;
     }
-    if (releaseHit) return { state: 'release', rule: releaseHit };
-    return { state: 'open', rule: null };
+    if (hits.exempt) return { state: 'open', rule: hits.exempt, note: exemptNote(hits.exempt) };
+    if (hits.closed) return { state: 'closed', rule: hits.closed, note: '' };
+    if (hits.release) return { state: 'release', rule: hits.release, note: '' };
+    if (hits.lane) return { state: 'lane', rule: hits.lane, note: '' };
+    return { state: 'open', rule: null, note: '' };
   }
   window.evaluateRules = evaluateRules; // 驗收用：console 可直接跑案例
 
@@ -299,11 +364,54 @@
 
   /* ---------------- 資料 ---------------- */
 
-  // ?data=sample-events-v2.geojson 可覆寫資料檔（只接受相對檔名，避免載入外部網址）
-  function resolveDataUrl() {
-    var q = new URLSearchParams(window.location.search).get('data');
-    if (!q || /^[a-z]+:|^\/\//i.test(q)) return CFG.dataUrl;
-    return q.indexOf('/') >= 0 ? q : 'data/' + q;
+  // 網址參數覆寫資料檔：只取 basename 掛在 data/ 底下，含協定（http: 等）或空值一律用預設，
+  // 避免被塞外部網址或跳出 data/（?data=sample-events-v2.geojson、?holidays=sample-holidays.json）
+  function resolveDataParam(name, fallback) {
+    var q = new URLSearchParams(window.location.search).get(name);
+    if (!q || /^[a-z][a-z0-9+.-]*:/i.test(q) || q.indexOf('//') === 0) return fallback;
+    var base = String(q).replace(/^.*[\\/]/, '').trim();
+    return base ? 'data/' + base : fallback;
+  }
+
+  function resolveDataUrl() { return resolveDataParam('data', CFG.dataUrl); }
+  function resolveHolidaysUrl() { return resolveDataParam('holidays', CFG.holidaysUrl || 'data/holidays.json'); }
+
+  // 假日表（SPEC §9d）。載入失敗不是致命錯誤：state.holidays = null → isHoliday 退回只算週六日。
+  function loadHolidays() {
+    var url = resolveHolidaysUrl();
+    return getJSON(url).then(function (j) {
+      var toSet = function (arr) {
+        var o = {};
+        (Array.isArray(arr) ? arr : []).forEach(function (s) { o[String(s).trim()] = 1; });
+        return o;
+      };
+      state.holidays = {
+        holidays: toSet(j.holidays),
+        workdays: toSet(j.workdays),
+        years: j.years || [],
+        source: j.source || '',
+        built_at: j.built_at || ''
+      };
+    }).catch(function () {
+      state.holidays = null;
+    }).then(function () {
+      renderHolidayNote(url);
+    });
+  }
+
+  function renderHolidayNote(url) {
+    var node = el.infoHolidays;
+    if (!node) return;
+    if (!state.holidays) {
+      node.textContent = '假日資料未載入，例假日僅以週六日判定（' + url + '）。';
+      node.className = 'modal-note c-timed';
+    } else {
+      var h = state.holidays, nh = Object.keys(h.holidays).length, nw = Object.keys(h.workdays).length;
+      node.textContent = '假日資料：' + (h.years.length ? h.years.join('、') + ' 年，' : '') +
+        nh + ' 天假日、' + nw + ' 天補行上班日。';
+      node.className = 'modal-note';
+    }
+    node.hidden = false;
   }
 
   function loadEvents() {
@@ -453,9 +561,12 @@
 
   function etaText(ev) {
     if (!ev.eta || !ev.verdict) return '';
+    if (ev.p.status === 'ended') return '';  // SPEC §9b：已解除事件不顯示 ETA 行
     var v = VERDICT[ev.verdict.state] || VERDICT.unknown;
     var r = ev.verdict.rule;
-    return '預計 ' + fmtHM(ev.eta) + ' 經過 → ' + v.label + (r ? '（' + r.from + '–' + r.to + '）' : '');
+    // exempt 命中時括號放說明（例假日不管制），其餘放規則時段
+    var detail = ev.verdict.note || (r ? r.from + '–' + r.to : '');
+    return '預計 ' + fmtHM(ev.eta) + ' 經過 → ' + v.label + (detail ? '（' + detail + '）' : '');
   }
 
   function cardSub(ev) {
@@ -487,8 +598,9 @@
 
   function summaryHtml(onList) {
     if (!state.route || !state.departAt) return '';
+    // SPEC §9a／§9b：lane（車道縮減）不計、已解除不計
     var hits = onList.filter(function (e) {
-      return e.verdict && (e.verdict.state === 'closed' || e.verdict.state === 'release');
+      return e.verdict && e.p.status !== 'ended' && COUNTED_VERDICTS.indexOf(e.verdict.state) >= 0;
     }).length;
     var word = state.timeMode === 'arrive' ? '本次抵達' : '本次出發';
     return '<div class="list-summary' + (hits ? ' is-hit' : '') + '">' +
@@ -862,6 +974,7 @@
     el.pickOrigin = $('btn-pick-origin');
     el.pickDest = $('btn-pick-dest');
     el.infoUpdated = $('info-updated');
+    el.infoHolidays = $('info-holidays');
 
     el.origin.value = CFG.defaultOrigin;
     el.dest.value = CFG.defaultDestination;
@@ -940,7 +1053,7 @@
 
   bindUI();
   initMap()
-    .then(loadEvents)
+    .then(function () { return Promise.all([loadEvents(), loadHolidays()]); })
     .then(function () {
       computeMatching();
       renderList();

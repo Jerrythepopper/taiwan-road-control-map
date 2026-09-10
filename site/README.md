@@ -24,6 +24,12 @@ python -m http.server 8765 --directory "E:\climbing source\site"
 - **路線偏好：台21**：OSM 把望高隧道段標成不可通行，OSRM 一定繞台18；此模式改為 OSRM 起點→`splice.fromM` 內插點 ＋ `tw21.geojson` 子段（`splice.speedKmh` 估時）＋ OSRM 末端→終點三段拼接，起點較靠塔塔加時自動反轉，任一段失敗顯示紅色錯誤條並退回「自動」。
 - `config.js` 另有 `roadLines`（里程折線路徑）、`splice`、`etaRefreshOnTimeChange` 三組設定。
 
+## 例外時段與例假日（SPEC §9a／§9b／§9d）
+
+- **網址參數** `?holidays=sample-holidays.json` 覆寫 `config.holidaysUrl`（與 `?data=` 同規則：只取檔名掛在 `data/` 下，含協定的網址一律用預設）；`data/holidays.json` 抓不到時退回「只算週六日」，並在 ⓘ 面板顯示「假日資料未載入」。
+- **`rules[].effect` 四種**：`closed` 封閉中（紅）／`release` 時段放行（琥珀）／`lane` 車道管制中（藍，可通行但車道縮減）／`exempt` 該時段不受本事件其他規則約束，命中即顯示「不在管制時段（例假日不管制／12:00–13:00 不管制）」；判定順序 exempt → closed → release → lane，都沒命中為 open，完全沒規則為 unknown。`days` 可用 `"daily"`、`["mon",…]` 或 `["holiday"]`（週六日與國定假日，扣掉 `holidays.json` 的補行上班日）。
+- **摘要「會遇到 N 筆管制」只算 `closed` 與 `release`**：`lane` 不計，`status: "ended"` 的事件不計且卡片與 popup 都不顯示「預計 … 經過」行。
+
 ## config.js 可調什麼
 
 | 值 | 說明 |
@@ -52,3 +58,6 @@ python -m http.server 8765 --directory "E:\climbing source\site"
 
 TDX 沒有常態性管制（例如台21夜間封閉），這類規則寫在 `scripts/manual_rules.json`：
 每筆欄位同 events properties，改完更新該筆 `last_verified` 並重跑上面的指令。
+
+- **`data/holidays.json` 怎麼更新**：`.venv/Scripts/python.exe scripts/build_holidays.py`（預設今年＋明年；來源＝data.gov.tw 資料集 14718「中華民國政府行政機關辦公日曆表」，下載連結由 dataset API 動態取得，不寫死）。政院每年公布次年行事曆後重跑一次即可；`holidays`＝放假日、`workdays`＝落在週六日的補行上班日（2026／2027 來源無補班日，故為空陣列），下載失敗時輸出空 `holidays` 並在 `source` 標明「查無」，前端退回只算週六日。
+- **`rules[].effect` 語意（`parse_news.py` 產生）**：`lane`＝車道縮減但仍可通行（「封閉外側車道」「單線雙向管制通行」等，由 `is_lane_control()` 判定，除非同時出現「全線封閉／道路封閉／禁止通行」；這類公告 `type` 一律 `construction`，**不再產生 `closed`**）；`exempt`＝該時段不受本事件其他規則約束（「例假日不施工／不管制」→ `days: ["holiday"]` 全天；「中午12時至13時不管制」→ `days: "daily"` 的時段 exempt）。

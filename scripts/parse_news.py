@@ -130,6 +130,43 @@ RELEASE_RE = re.compile(r"放行")
 # 單線雙向這類「可通行但受管制」原文。實例：「採單線雙向管制通行」「依現況單線機動管制」
 CONTROLLED_PASS_RE = re.compile(r"單線[^，。]{0,6}管制通行|機動管制|管制通行")
 
+# --- 車道封閉 ≠ 道路封閉（SPEC §9a）---------------------------------------
+
+# 車道類關鍵字：只縮減車道、道路仍可通行。實例：「封閉外側車道」「採單線雙向管制通行」
+LANE_RE = re.compile(r"車道|外側|內側|單線雙向|縮減")
+# 整條路封死才算 closure，出現這些字時車道規則讓位。實例：「道路封閉」「全線封閉」「禁止通行」
+ROAD_CLOSED_RE = re.compile(r"全線封閉|道路封閉|禁止通行|不得通行")
+# 車道原文片段，放進 rules[].note。實例：「封閉外側車道進行管線更換工程」
+LANE_NOTE_RE = re.compile(r"[^，。；、\n]{0,14}(?:車道|單線雙向|縮減)[^，。；、\n]{0,10}")
+
+
+# 明講「不占用車道」的公告不算車道管制。實例 NewsID 62878「施工期間路段不占用車道」
+NO_LANE_IMPACT_RE = re.compile(r"[不未][占佔]用車道")
+
+
+def is_lane_control(text: str) -> bool:
+    """車道縮減（仍可通行）而非整路封閉 → SPEC §9a 的 `lane`。"""
+    t = NO_LANE_IMPACT_RE.sub("", normalize(text))
+    return bool(LANE_RE.search(t)) and not ROAD_CLOSED_RE.search(t)
+
+
+# --- 例外時段與例假日（SPEC §9d）-------------------------------------------
+
+# 例假日整天不受管制。實例：「(例假日不管制)」「原則例假日不施工」
+HOLIDAY_EXEMPT_RE = re.compile(
+    r"(?:例假日|國定假日|連續假期|假日)\s*(?:暫停施工|暫停管制|不管制|不施工|暫停|開放通行)"
+)
+# 指定時段不受管制。實例：「中午12時至13時不管制」「11:30至13:00開放通行」
+TIME_EXEMPT_RE = re.compile(
+    r"(?:中午)?\s*(\d{1,2})\s*(?:[:：]\s*(\d{1,2})|時\s*(?:(\d{1,2})\s*分)?)\s*(?:起)?\s*"
+    r"(?:至|到|~|～|-|－)\s*(?:翌日|隔日|次日)?\s*"
+    r"(\d{1,2})\s*(?:[:：]\s*(\d{1,2})|時\s*(?:(\d{1,2})\s*分)?)\s*(?:止)?\s*"
+    r"(?:不管制|開放通行|暫停管制|不施工)"
+)
+# 只在平日管制。實例：「週一至週五」「平日」（「每周一至周日」不算，因為不是至周五）
+WEEKDAY_ONLY_RE = re.compile(r"[週周]一至[週周]五|平日")
+WEEKDAYS = ["mon", "tue", "wed", "thu", "fri"]
+
 
 def _to_hhmm(mark, hh, mm1, mm2) -> str:
     h = int(hh)
@@ -142,38 +179,96 @@ def _to_hhmm(mark, hh, mm1, mm2) -> str:
     return f"{h:02d}:{m:02d}"
 
 
-def extract_rules(text: str) -> tuple[list, str]:
-    """回傳 (rules[], schedule 文字)。無「每日/每天」時段者回 ([], "")。"""
+def _plain_hhmm(hh, mm_colon, mm_char) -> str:
+    """「12時」「12:30」「12時30分」→ `HH:MM`（例外時段用，沒有上午/下午前綴）。"""
+    h = int(hh) % 24
+    m = int(mm_colon or mm_char or 0)
+    return f"{h:02d}:{m:02d}"
+
+
+def extract_exempt_rules(text: str) -> list:
+    """SPEC §9d：例假日／指定時段「不管制」→ `effect:"exempt"` 規則。
+
+    實例 NewsID 72045「(例假日不管制)」→ days ["holiday"] 全天 exempt；
+    實例 NewsID 67297「中午12時至13時不管制」→ days "daily" 12:00–13:00 exempt。
+    """
     t = normalize(text)
     rules = []
+    hm = HOLIDAY_EXEMPT_RE.search(t)
+    if hm:
+        rules.append({"days": ["holiday"], "from": "00:00", "to": "24:00",
+                      "effect": "exempt", "note": hm.group(0).strip()})
+    for m in TIME_EXEMPT_RE.finditer(t):
+        g = m.groups()
+        start = _plain_hhmm(g[0], g[1], g[2])
+        end = _plain_hhmm(g[3], g[4], g[5])
+        if start == end:
+            continue
+        rules.append({"days": "daily", "from": start, "to": end,
+                      "effect": "exempt", "note": m.group(0).strip()})
+    return rules
+
+
+def extract_rules(text: str) -> tuple[list, str]:
+    """回傳 (rules[], schedule 文字)。
+
+    主規則來自「每日/每天 HH–HH」時段；效果依 SPEC §9a／§7a 判定：
+      放行 → `release`；車道縮減（且非整路封閉）→ `lane`；封閉 → `closed`；
+      單線雙向／機動管制 → `release`；都沒有 → 不產生規則（只留 schedule 文字）。
+    另外不論有沒有主規則，都會附上 §9d 的 `exempt` 規則。
+    """
+    t = normalize(text)
+    rules: list = []
+    parts: list = []
+
     m = DAILY_RANGE_RE.search(t)
-    if not m:
-        return [], ""
-    g = m.groups()
-    start = _to_hhmm(g[0], g[1], g[2], g[3])
-    end = _to_hhmm(g[4], g[5], g[6], g[7])
+    if m:
+        g = m.groups()
+        start = _to_hhmm(g[0], g[1], g[2], g[3])
+        end = _to_hhmm(g[4], g[5], g[6], g[7])
 
-    note = ""
-    if RELEASE_RE.search(t):
-        effect = "release"
-        rm = RELEASE_NOTE_RE.search(t)
-        note = rm.group(0).strip() if rm else "定時放行"
-    elif CLOSED_RE.search(t):
-        effect = "closed"
-    elif CONTROLLED_PASS_RE.search(t):
-        # 單線雙向／機動管制：可通行但受管制，效果歸類為 release，原文留在 note
-        effect = "release"
-        cm = CONTROLLED_PASS_RE.search(t)
-        note = cm.group(0).strip() if cm else ""
-    else:
-        # 只有施工時段、沒有封閉也沒有放行／管制通行字樣（實例 NewsID 78486
-        # 「每日8時至17時，路段多有工程車輛出入…減速慢行」）：不產生 rules，
-        # 免得前端把單純的施工時段誤判成「封閉中」；時段仍留在 schedule 文字。
-        return [], f"每日 {start}–{end}（施工時段）"
+        effect, note = None, ""
+        if RELEASE_RE.search(t):
+            effect = "release"
+            rm = RELEASE_NOTE_RE.search(t)
+            note = rm.group(0).strip() if rm else "定時放行"
+        elif is_lane_control(t):
+            # SPEC §9a：「封閉外側車道」「採單線雙向管制通行」= 車道縮減，仍可通行，
+            # 不產生 closed，改用 lane。
+            effect = "lane"
+            lm = LANE_NOTE_RE.search(t)
+            note = lm.group(0).strip() if lm else "車道縮減管制"
+        elif CLOSED_RE.search(t):
+            effect = "closed"
+        elif CONTROLLED_PASS_RE.search(t):
+            # 單線雙向／機動管制：可通行但受管制，效果歸類為 release，原文留在 note
+            effect = "release"
+            cm = CONTROLLED_PASS_RE.search(t)
+            note = cm.group(0).strip() if cm else ""
 
-    rules.append({"days": "daily", "from": start, "to": end, "effect": effect, "note": note})
-    schedule = f"每日 {start}–{end}" + (f"，{note}" if note else "")
-    return rules, schedule
+        if effect is None:
+            # 只有施工時段、沒有封閉也沒有放行／管制通行字樣（實例 NewsID 78486
+            # 「每日8時至17時，路段多有工程車輛出入…減速慢行」）：不產生 rules，
+            # 免得前端把單純的施工時段誤判成「封閉中」；時段仍留在 schedule 文字。
+            parts.append(f"每日 {start}–{end}（施工時段）")
+        else:
+            weekday_only = bool(WEEKDAY_ONLY_RE.search(t))
+            days = list(WEEKDAYS) if weekday_only else "daily"
+            rules.append({"days": days, "from": start, "to": end,
+                          "effect": effect, "note": note})
+            label = "平日" if weekday_only else "每日"
+            parts.append(f"{label} {start}–{end}" + (f"，{note}" if note else ""))
+
+    for r in extract_exempt_rules(t):
+        rules.append(r)
+        if r["note"]:
+            parts.append(r["note"])
+        elif r["days"] == ["holiday"]:
+            parts.append("例假日不管制")
+        else:
+            parts.append(f"{r['from']}–{r['to']} 不管制")
+
+    return rules, "；".join(parts)
 
 
 # --- 日期 -----------------------------------------------------------------
@@ -225,13 +320,26 @@ TIMED_RE = re.compile(r"放行|管制時段|時段管制")
 
 
 def detect_type(text: str, rules: list) -> str:
-    """放行優先於封閉：132K+300 那筆同時有「封閉」與「整點放行」，屬時段管制（SPEC §8c）。"""
+    """判定順序（SPEC §8c + §9a）：
+
+    1. 放行／管制時段 → `timed`。放行優先於封閉：NewsID 67297 同時有「封閉」與
+       「整點放行」，屬時段管制（SPEC §8c-1 明列，故此條排在車道規則之前）。
+    2. 「全線封閉／道路封閉／禁止通行」→ `closure`（§9a 的「後者優先」）。
+    3. 車道類字樣（車道／外側／內側／單線雙向／縮減）→ `construction`
+       （§9a：封閉外側車道不是道路封閉。實例 NewsID 79329）。
+    4. 其餘出現「封閉」→ `closure`。
+    5. 有非 exempt 的時段規則 → `timed`；否則 `construction`。
+    """
     t = normalize(text)
     if TIMED_RE.search(t):
         return "timed"
+    if ROAD_CLOSED_RE.search(t):
+        return "closure"
+    if LANE_RE.search(t):
+        return "construction"
     if CLOSED_RE.search(t):
         return "closure"
-    if rules:
+    if any(r.get("effect") != "exempt" for r in rules):
         return "timed"
     return "construction"
 

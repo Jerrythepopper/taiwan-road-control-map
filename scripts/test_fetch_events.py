@@ -1,4 +1,4 @@
-"""SPEC §8c 資料單驗收測試。
+"""SPEC §8c 資料單驗收測試 + §9e 小毛病修正批次驗收（車道 lane、例假日 exempt、終點對齊）。
 
 跑法（不打網路，輸出到暫存檔，不動 site/data/events.geojson）：
     .venv/Scripts/python.exe scripts/test_fetch_events.py
@@ -106,6 +106,54 @@ def main() -> int:
                   and f["properties"].get("from_km") and f["properties"].get("to_km")
                   and f["geometry"] is not None)
         check("§8c-3 台18線至少 5 筆解析出里程且有幾何", n18 >= 5, f"實際 {n18} 筆")
+
+        # --- SPEC §9e ---------------------------------------------------
+
+        # §9e-1 NewsID 79329「封閉外側車道」→ type=construction 且 rules 無 closed
+        f79329 = [f for f in feats if (f["properties"].get("source_id") or "").startswith("79329")]
+        ok = len(f79329) > 0
+        if ok:
+            props = [f["properties"] for f in f79329]
+            ok = all(p["type"] == "construction" for p in props) and all(
+                r.get("effect") != "closed" for p in props for r in p.get("rules", []))
+            detail = "; ".join(
+                f"type={p['type']}, rules={[(r.get('effect'), r.get('from'), r.get('to')) for r in p.get('rules', [])]}"
+                for p in props)
+        else:
+            detail = "找不到 source_id=79329"
+        check("§9e-1 NewsID 79329 封閉外側車道 → construction 且 rules 無 closed", ok, detail)
+
+        # §9e-2 含「例假日不施工／不管制」的公告 → 有 days 含 holiday 的 exempt 規則
+        holiday_feats = [
+            f for f in feats
+            if any(r.get("effect") == "exempt" and "holiday" in (r.get("days") or [])
+                   for r in f["properties"].get("rules", []))
+        ]
+        ok = len(holiday_feats) >= 1
+        detail = "；".join(
+            f"{f['properties'].get('source_id') or 'manual'} "
+            f"{[r for r in f['properties']['rules'] if r.get('effect') == 'exempt']}"
+            for f in holiday_feats[:3]) or "沒有任何事件帶 holiday exempt 規則"
+        check("§9e-2 至少一筆公告解析出 days=[holiday] 的 exempt 規則", ok, detail)
+
+        # §9e-3 台21 夜間封閉仍為 closed 17:30–07:00（車道／exempt 改動不得波及）
+        ok = fnight is not None
+        if ok:
+            rules = fnight["properties"].get("rules", [])
+            closed = [r for r in rules if r.get("effect") == "closed"]
+            ok = (len(closed) == 1 and closed[0]["from"] == "17:30" and closed[0]["to"] == "07:00"
+                  and not any(r.get("effect") == "lane" for r in rules))
+            detail = f"rules={rules}"
+        else:
+            detail = "找不到台21 夜間封閉"
+        check("§9e-3 台21 夜間封閉 rules 未被 §9a/§9d 改動（唯一 closed 17:30–07:00、無 lane）",
+              ok, detail)
+
+        # §9c 折線終點對齊後，不得再出現「已 clamp」警告（145K+035 必須在折線範圍內）
+        clamped = [f for f in feats
+                   if any("clamp" in w for w in (f["properties"].get("parse_warnings") or []))]
+        check("§9c 沒有任何事件出現里程 clamp 警告", not clamped,
+              "、".join(f"{f['properties'].get('source_id') or 'manual'}" for f in clamped) or "0 筆")
 
         # §8c-4 輸出檔不含 .env 的任一值
         vals = load_env_values(ENV_PATH)

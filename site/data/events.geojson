@@ -1,72 +1,21 @@
 {
   "type": "FeatureCollection",
   "meta": {
-    "generated_at": "2026-09-11T00:53:35+00:00",
+    "generated_at": "2026-09-11T05:44:42+00:00",
     "sources": [
       {
         "name": "TDX 路況資訊v2 Live/News/Highway",
-        "fetched_at": "2026-09-11T00:53:33+00:00",
+        "fetched_at": "2026-09-11T05:44:39+00:00",
         "count": 26
       },
       {
         "name": "scripts/manual_rules.json（人工維護常態規則）",
-        "fetched_at": "2026-09-11T00:53:33+00:00",
+        "fetched_at": "2026-09-11T05:44:39+00:00",
         "count": 1
       }
     ]
   },
   "features": [
-    {
-      "type": "Feature",
-      "properties": {
-        "source_id": "78219",
-        "road": "台18線",
-        "direction": "雙向",
-        "from_km": "35K+200",
-        "to_km": "35K+200",
-        "type": "construction",
-        "status": "active",
-        "title": "台18線雙向35K+200防落石網鑽設作業",
-        "summary": "台18線雙向35K+200防落石網鑽設作業",
-        "description": "台18線雙向35K+200防落石網鑽設作業，自115年8月25日起至115年10月9日止，每日7時至17時，採單線雙向管制通行，敬請用路人配合交管人員指揮，造成用路人不便，尚祈見諒。",
-        "schedule": "每日 07:00–17:00，採單線雙向管制通行",
-        "rules": [
-          {
-            "days": "daily",
-            "from": "07:00",
-            "to": "17:00",
-            "effect": "lane",
-            "note": "採單線雙向管制通行"
-          }
-        ],
-        "start_date": "2026-08-25",
-        "end_date": "2026-10-09",
-        "source_name": "公路局即時路況快訊（TDX）",
-        "source_url": "https://168.thb.gov.tw/",
-        "news_category": 4,
-        "parse_warnings": [],
-        "id": "717290968a03",
-        "fetched_at": "2026-09-11T00:53:33+00:00",
-        "geom_precision": "route-interp"
-      },
-      "geometry": {
-        "type": "LineString",
-        "coordinates": [
-          [
-            120.610159,
-            23.437407
-          ],
-          [
-            120.610201,
-            23.436523
-          ],
-          [
-            120.610993,
-            23.436045
-          ]
-        ]
-      }
-    },
     {
       "type": "Feature",
       "properties": {
@@ -97,7 +46,7 @@
         "news_category": 4,
         "parse_warnings": [],
         "id": "5fb81aed2989",
-        "fetched_at": "2026-09-11T00:53:33+00:00",
+        "fetched_at": "2026-09-11T05:44:39+00:00",
         "geom_precision": "route-interp"
       },
       "geometry": {
@@ -148,7 +97,7 @@
         "news_category": 4,
         "parse_warnings": [],
         "id": "2b3ba2fae793",
-        "fetched_at": "2026-09-11T00:53:33+00:00",
+        "fetched_at": "2026-09-11T05:44:39+00:00",
         "geom_precision": "route-interp"
       },
       "geometry": {
@@ -203,7 +152,7 @@
         "news_category": 4,
         "parse_warnings": [],
         "id": "9e16049cdef1",
-        "fetched_at": "2026-09-11T00:53:33+00:00",
+        "fetched_at": "2026-09-11T05:44:39+00:00",
         "geom_precision": "route-interp"
       },
       "geometry": {
@@ -294,7 +243,7 @@
         "news_category": 4,
         "parse_warnings": [],
         "id": "5c99a7dbefe2",
-        "fetched_at": "2026-09-11T00:53:33+00:00",
+        "fetched_at": "2026-09-11T05:44:39+00:00",
         "geom_precision": "route-interp"
       },
       "geometry": {
@@ -413,7 +362,7 @@
         "news_category": 4,
         "parse_warnings": [],
         "id": "14f86e53b2ac",
-        "fetched_at": "2026-09-11T00:53:33+00:00",
+        "fetched_at": "2026-09-11T05:44:39+00:00",
         "geom_precision": "route-interp"
       },
       "geometry": {
@@ -500,7 +449,7 @@
         "news_category": 4,
         "parse_warnings": [],
         "id": "081624125f91",
-        "fetched_at": "2026-09-11T00:53:33+00:00",
+        "fetched_at": "2026-09-11T05:44:39+00:00",
         "geom_precision": "route-interp"
       },
       "geometry": {
@@ -547,7 +496,7 @@
         "news_category": 4,
         "parse_warnings": [],
         "id": "1b6c269169da",
-        "fetched_at": "2026-09-11T00:53:33+00:00",
+        "fetched_at": "2026-09-11T05:44:39+00:00",
         "geom_precision": "route-interp"
       },
       "geometry": {
@@ -618,7 +567,7 @@
         "news_category": 4,
         "parse_warnings": [],
         "id": "6b3efea03560",
-        "fetched_at": "2026-09-11T00:53:33+00:00",
+        "fetched_at": "2026-09-11T05:44:39+00:00",
         "geom_precision": "route-interp"
       },
       "geometry": {
@@ -669,7 +618,7 @@
         "news_category": 4,
         "parse_warnings": [],
         "id": "600f760b816a",
-        "fetched_at": "2026-09-11T00:53:33+00:00",
+        "fetched_at": "2026-09-11T05:44:39+00:00",
         "geom_precision": "route-interp"
       },
       "geometry": {
@@ -1032,7 +981,7 @@
         "news_category": 4,
         "parse_warnings": [],
         "id": "109b153c592a",
-        "fetched_at": "2026-09-11T00:53:33+00:00",
+        "fetched_at": "2026-09-11T05:44:39+00:00",
         "geom_precision": "route-interp"
       },
       "geometry": {
@@ -1104,7 +1053,7 @@
         "news_category": 4,
         "parse_warnings": [],
         "id": "7c715a9a62ee",
-        "fetched_at": "2026-09-11T00:53:33+00:00",
+        "fetched_at": "2026-09-11T05:44:39+00:00",
         "geom_precision": "route-interp"
       },
       "geometry": {
@@ -1164,7 +1113,7 @@
         "news_category": 4,
         "parse_warnings": [],
         "id": "aad2e5e4a3db",
-        "fetched_at": "2026-09-11T00:53:33+00:00",
+        "fetched_at": "2026-09-11T05:44:39+00:00",
         "geom_precision": "route-interp"
       },
       "geometry": {
@@ -1239,7 +1188,7 @@
         "news_category": 4,
         "parse_warnings": [],
         "id": "400871d2bcd3",
-        "fetched_at": "2026-09-11T00:53:33+00:00",
+        "fetched_at": "2026-09-11T05:44:39+00:00",
         "geom_precision": "route-interp"
       },
       "geometry": {
@@ -1256,6 +1205,89 @@
           [
             120.876066,
             24.070821
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "source_id": "79532",
+        "road": "台21線",
+        "direction": "雙向",
+        "from_km": "30K+000",
+        "to_km": "31K+000",
+        "type": "timed",
+        "status": "scheduled",
+        "title": "台21線雙向30K至31K埔里路段，於全車道進行路面刨鋪工程。",
+        "summary": "台21線雙向30K至31K埔里路段",
+        "description": "台21線雙向30K至31K埔里路段，自115年9月15日至115年9月20日每日8時起至17時30分止，於全車道進行路面刨鋪工程，採內外車道輪流施工並維持單向一車道輪流放行，請注意路況並小心駕駛。",
+        "schedule": "每日 08:00–17:30，放行",
+        "rules": [
+          {
+            "days": "daily",
+            "from": "08:00",
+            "to": "17:30",
+            "effect": "release",
+            "note": "放行"
+          }
+        ],
+        "start_date": "2026-09-15",
+        "end_date": "2026-09-20",
+        "source_name": "公路局即時路況快訊（TDX）",
+        "source_url": "https://168.thb.gov.tw/",
+        "news_category": 4,
+        "parse_warnings": [],
+        "id": "63a36e1bd542",
+        "fetched_at": "2026-09-11T05:44:39+00:00",
+        "geom_precision": "route-interp"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            120.934456,
+            24.051636
+          ],
+          [
+            120.935081,
+            24.051013
+          ],
+          [
+            120.934986,
+            24.050283
+          ],
+          [
+            120.935745,
+            24.050103
+          ],
+          [
+            120.935536,
+            24.049412
+          ],
+          [
+            120.934623,
+            24.049736
+          ],
+          [
+            120.933718,
+            24.049524
+          ],
+          [
+            120.932858,
+            24.04994
+          ],
+          [
+            120.933221,
+            24.049245
+          ],
+          [
+            120.93385,
+            24.048553
+          ],
+          [
+            120.934772,
+            24.048277
           ]
         ]
       }
@@ -1282,7 +1314,7 @@
         "news_category": 4,
         "parse_warnings": [],
         "id": "83969b11cdb2",
-        "fetched_at": "2026-09-11T00:53:33+00:00",
+        "fetched_at": "2026-09-11T05:44:39+00:00",
         "geom_precision": "route-interp"
       },
       "geometry": {
@@ -1318,6 +1350,69 @@
     {
       "type": "Feature",
       "properties": {
+        "source_id": "79533",
+        "road": "台21線",
+        "direction": "雙向",
+        "from_km": "37K+000",
+        "to_km": "37K+500",
+        "type": "timed",
+        "status": "scheduled",
+        "title": "台21線雙向37K至37K+500埔里路段，於全車道進行路面刨鋪工程。",
+        "summary": "台21線雙向37K至37K+500埔里路段",
+        "description": "台21線雙向37K至37K+500埔里路段，自115年9月15日至115年9月20日每日8時起至17時30分止，於全車道進行路面刨鋪工程，採內外車道輪流施工並維持單向一車道輪流放行，請注意路況並小心駕駛。",
+        "schedule": "每日 08:00–17:30，放行",
+        "rules": [
+          {
+            "days": "daily",
+            "from": "08:00",
+            "to": "17:30",
+            "effect": "release",
+            "note": "放行"
+          }
+        ],
+        "start_date": "2026-09-15",
+        "end_date": "2026-09-20",
+        "source_name": "公路局即時路況快訊（TDX）",
+        "source_url": "https://168.thb.gov.tw/",
+        "news_category": 4,
+        "parse_warnings": [],
+        "id": "79c2f06006e5",
+        "fetched_at": "2026-09-11T05:44:39+00:00",
+        "geom_precision": "route-interp"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            120.942281,
+            24.027683
+          ],
+          [
+            120.94324,
+            24.02782
+          ],
+          [
+            120.943997,
+            24.027259
+          ],
+          [
+            120.944799,
+            24.026749
+          ],
+          [
+            120.945454,
+            24.026078
+          ],
+          [
+            120.946052,
+            24.025365
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
         "source_id": "78599",
         "road": "台21線",
         "direction": "雙向",
@@ -1337,7 +1432,7 @@
         "news_category": 1,
         "parse_warnings": [],
         "id": "d23a3534f110",
-        "fetched_at": "2026-09-11T00:53:33+00:00",
+        "fetched_at": "2026-09-11T05:44:39+00:00",
         "geom_precision": "route-interp"
       },
       "geometry": {
@@ -1392,68 +1487,7 @@
         "news_category": 4,
         "parse_warnings": [],
         "id": "50d74ea901bd",
-        "fetched_at": "2026-09-11T00:53:33+00:00",
-        "geom_precision": "route-interp"
-      },
-      "geometry": {
-        "type": "LineString",
-        "coordinates": [
-          [
-            120.900863,
-            23.849137
-          ],
-          [
-            120.900816,
-            23.849495
-          ],
-          [
-            120.900879,
-            23.850392
-          ],
-          [
-            120.901092,
-            23.851272
-          ],
-          [
-            120.90129,
-            23.852155
-          ],
-          [
-            120.901488,
-            23.853038
-          ],
-          [
-            120.901635,
-            23.853691
-          ]
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "source_id": "79469",
-        "road": "台21線",
-        "direction": "往山下",
-        "from_km": "65K+740",
-        "to_km": "65K+226",
-        "type": "construction",
-        "status": "ended",
-        "title": "台21線北上65K+740至65K+226水社隧道路段，封閉外側車道進行管線更換工程。",
-        "summary": "台21線北上65K+740至65K+226水社隧道路段",
-        "description": "台21線北上65K+740至65K+226水社隧道路段，自115年9月10日當日16時起至隔日9時止，封閉外側車道進行管線更換工程，請注意路況並小心駕駛。",
-        "schedule": "",
-        "rules": [],
-        "start_date": "2026-09-10",
-        "end_date": "2026-09-10",
-        "source_name": "公路局即時路況快訊（TDX）",
-        "source_url": "https://168.thb.gov.tw/",
-        "news_category": 4,
-        "parse_warnings": [
-          "id 與另一筆公告相同（同路線/里程/標題），已加後綴 -79469 區隔"
-        ],
-        "id": "50d74ea901bd-79469",
-        "fetched_at": "2026-09-11T00:53:33+00:00",
+        "fetched_at": "2026-09-11T05:44:39+00:00",
         "geom_precision": "route-interp"
       },
       "geometry": {
@@ -1512,7 +1546,7 @@
         "news_category": 4,
         "parse_warnings": [],
         "id": "0562ceb6312d",
-        "fetched_at": "2026-09-11T00:53:33+00:00",
+        "fetched_at": "2026-09-11T05:44:39+00:00",
         "geom_precision": "route-interp"
       },
       "geometry": {
@@ -2883,7 +2917,7 @@
         "news_category": 4,
         "parse_warnings": [],
         "id": "97fd40734aef",
-        "fetched_at": "2026-09-11T00:53:33+00:00",
+        "fetched_at": "2026-09-11T05:44:39+00:00",
         "geom_precision": "route-interp"
       },
       "geometry": {
@@ -4182,7 +4216,7 @@
         "news_category": 4,
         "parse_warnings": [],
         "id": "bb5472c01ba2",
-        "fetched_at": "2026-09-11T00:53:33+00:00",
+        "fetched_at": "2026-09-11T05:44:39+00:00",
         "geom_precision": "route-interp"
       },
       "geometry": {
@@ -6817,7 +6851,7 @@
         "news_category": 4,
         "parse_warnings": [],
         "id": "89c70ee6355f",
-        "fetched_at": "2026-09-11T00:53:33+00:00",
+        "fetched_at": "2026-09-11T05:44:39+00:00",
         "geom_precision": "route-interp"
       },
       "geometry": {
@@ -6860,7 +6894,7 @@
         "news_category": 4,
         "parse_warnings": [],
         "id": "62b1a8d562cb",
-        "fetched_at": "2026-09-11T00:53:33+00:00",
+        "fetched_at": "2026-09-11T05:44:39+00:00",
         "geom_precision": "route-interp"
       },
       "geometry": {
@@ -6907,7 +6941,7 @@
         "news_category": 4,
         "parse_warnings": [],
         "id": "2a44f6c42ad5",
-        "fetched_at": "2026-09-11T00:53:33+00:00",
+        "fetched_at": "2026-09-11T05:44:39+00:00",
         "geom_precision": "route-interp"
       },
       "geometry": {
@@ -6962,7 +6996,7 @@
         "source_id": "",
         "status": "active",
         "id": "52213d158ad9",
-        "fetched_at": "2026-09-11T00:53:33+00:00",
+        "fetched_at": "2026-09-11T05:44:39+00:00",
         "geom_precision": "route-interp"
       },
       "geometry": {
@@ -8367,7 +8401,7 @@
           "里程 145K+085 超過 台21線 折線終點 145K+035，已 clamp（segment 終點）"
         ],
         "id": "3cbe58045444",
-        "fetched_at": "2026-09-11T00:53:33+00:00",
+        "fetched_at": "2026-09-11T05:44:39+00:00",
         "geom_precision": "route-interp"
       },
       "geometry": {
@@ -9541,7 +9575,7 @@
         "news_category": 4,
         "parse_warnings": [],
         "id": "4a027115a62a",
-        "fetched_at": "2026-09-11T00:53:33+00:00",
+        "fetched_at": "2026-09-11T05:44:39+00:00",
         "geom_precision": "route-interp"
       },
       "geometry": {

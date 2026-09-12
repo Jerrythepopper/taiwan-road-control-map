@@ -1,16 +1,16 @@
 {
   "type": "FeatureCollection",
   "meta": {
-    "generated_at": "2026-09-11T18:23:09+00:00",
+    "generated_at": "2026-09-12T00:01:22+00:00",
     "sources": [
       {
         "name": "TDX 路況資訊v2 Live/News/Highway",
-        "fetched_at": "2026-09-11T18:23:06+00:00",
+        "fetched_at": "2026-09-12T00:01:17+00:00",
         "count": 21
       },
       {
         "name": "scripts/manual_rules.json（人工維護常態規則）",
-        "fetched_at": "2026-09-11T18:23:06+00:00",
+        "fetched_at": "2026-09-12T00:01:17+00:00",
         "count": 1
       }
     ]
@@ -46,7 +46,7 @@
         "news_category": 4,
         "parse_warnings": [],
         "id": "5fb81aed2989",
-        "fetched_at": "2026-09-11T18:23:06+00:00",
+        "fetched_at": "2026-09-12T00:01:17+00:00",
         "geom_precision": "route-interp"
       },
       "geometry": {
@@ -97,7 +97,7 @@
         "news_category": 4,
         "parse_warnings": [],
         "id": "2b3ba2fae793",
-        "fetched_at": "2026-09-11T18:23:06+00:00",
+        "fetched_at": "2026-09-12T00:01:17+00:00",
         "geom_precision": "route-interp"
       },
       "geometry": {
@@ -152,7 +152,7 @@
         "news_category": 4,
         "parse_warnings": [],
         "id": "9e16049cdef1",
-        "fetched_at": "2026-09-11T18:23:06+00:00",
+        "fetched_at": "2026-09-12T00:01:17+00:00",
         "geom_precision": "route-interp"
       },
       "geometry": {
@@ -243,7 +243,7 @@
         "news_category": 4,
         "parse_warnings": [],
         "id": "5c99a7dbefe2",
-        "fetched_at": "2026-09-11T18:23:06+00:00",
+        "fetched_at": "2026-09-12T00:01:17+00:00",
         "geom_precision": "route-interp"
       },
       "geometry": {
@@ -362,7 +362,7 @@
         "news_category": 4,
         "parse_warnings": [],
         "id": "14f86e53b2ac",
-        "fetched_at": "2026-09-11T18:23:06+00:00",
+        "fetched_at": "2026-09-12T00:01:17+00:00",
         "geom_precision": "route-interp"
       },
       "geometry": {
@@ -449,7 +449,7 @@
         "news_category": 4,
         "parse_warnings": [],
         "id": "081624125f91",
-        "fetched_at": "2026-09-11T18:23:06+00:00",
+        "fetched_at": "2026-09-12T00:01:17+00:00",
         "geom_precision": "route-interp"
       },
       "geometry": {
@@ -496,7 +496,7 @@
         "news_category": 4,
         "parse_warnings": [],
         "id": "1b6c269169da",
-        "fetched_at": "2026-09-11T18:23:06+00:00",
+        "fetched_at": "2026-09-12T00:01:17+00:00",
         "geom_precision": "route-interp"
       },
       "geometry": {
@@ -567,7 +567,7 @@
         "news_category": 4,
         "parse_warnings": [],
         "id": "6b3efea03560",
-        "fetched_at": "2026-09-11T18:23:06+00:00",
+        "fetched_at": "2026-09-12T00:01:17+00:00",
         "geom_precision": "route-interp"
       },
       "geometry": {
@@ -618,7 +618,7 @@
         "news_category": 4,
         "parse_warnings": [],
         "id": "600f760b816a",
-        "fetched_at": "2026-09-11T18:23:06+00:00",
+        "fetched_at": "2026-09-12T00:01:17+00:00",
         "geom_precision": "route-interp"
       },
       "geometry": {
@@ -981,7 +981,7 @@
         "news_category": 4,
         "parse_warnings": [],
         "id": "109b153c592a",
-        "fetched_at": "2026-09-11T18:23:06+00:00",
+        "fetched_at": "2026-09-12T00:01:17+00:00",
         "geom_precision": "route-interp"
       },
       "geometry": {
@@ -1053,7 +1053,7 @@
         "news_category": 4,
         "parse_warnings": [],
         "id": "7c715a9a62ee",
-        "fetched_at": "2026-09-11T18:23:06+00:00",
+        "fetched_at": "2026-09-12T00:01:17+00:00",
         "geom_precision": "route-interp"
       },
       "geometry": {
@@ -1113,7 +1113,7 @@
         "news_category": 4,
         "parse_warnings": [],
         "id": "aad2e5e4a3db",
-        "fetched_at": "2026-09-11T18:23:06+00:00",
+        "fetched_at": "2026-09-12T00:01:17+00:00",
         "geom_precision": "route-interp"
       },
       "geometry": {
@@ -1175,7 +1175,7 @@
         "from_km": "20K+700",
         "to_km": "20K+700",
         "type": "construction",
-        "status": "scheduled",
+        "status": "active",
         "title": "台21線雙向20K+700國姓路段，於全車道進行公路及橋梁維修改善及災害搶修工程。",
         "summary": "台21線雙向20K+700國姓路段",
         "description": "台21線雙向20K+700國姓路段，自115年9月12日當日8時起至17時止，於全車道進行公路及橋梁維修改善及災害搶修工程，依現況單線機動管制，請注意路況並小心駕駛。",
@@ -1188,7 +1188,7 @@
         "news_category": 4,
         "parse_warnings": [],
         "id": "400871d2bcd3",
-        "fetched_at": "2026-09-11T18:23:06+00:00",
+        "fetched_at": "2026-09-12T00:01:17+00:00",
         "geom_precision": "route-interp"
       },
       "geometry": {
@@ -1239,7 +1239,7 @@
         "news_category": 4,
         "parse_warnings": [],
         "id": "63a36e1bd542",
-        "fetched_at": "2026-09-11T18:23:06+00:00",
+        "fetched_at": "2026-09-12T00:01:17+00:00",
         "geom_precision": "route-interp"
       },
       "geometry": {
@@ -1322,7 +1322,7 @@
         "news_category": 4,
         "parse_warnings": [],
         "id": "79c2f06006e5",
-        "fetched_at": "2026-09-11T18:23:06+00:00",
+        "fetched_at": "2026-09-12T00:01:17+00:00",
         "geom_precision": "route-interp"
       },
       "geometry": {
@@ -1377,7 +1377,7 @@
         "news_category": 1,
         "parse_warnings": [],
         "id": "d23a3534f110",
-        "fetched_at": "2026-09-11T18:23:06+00:00",
+        "fetched_at": "2026-09-12T00:01:17+00:00",
         "geom_precision": "route-interp"
       },
       "geometry": {
@@ -1411,7 +1411,7 @@
         "from_km": "76K+000",
         "to_km": "141K+000",
         "type": "construction",
-        "status": "scheduled",
+        "status": "active",
         "title": "台21線南下76K至141K頂崁至夫妻樹路段，於全車道進行公路維修工作。",
         "summary": "台21線南下76K至141K頂崁至夫妻樹路段",
         "description": "台21線南下76K至141K頂崁至夫妻樹路段，自115年9月12日當日8時起至17時止，於全車道進行公路維修工作，現場交管維持單線雙向機動管制通行，請注意路況並小心駕駛。",
@@ -1424,7 +1424,7 @@
         "news_category": 4,
         "parse_warnings": [],
         "id": "bb5472c01ba2",
-        "fetched_at": "2026-09-11T18:23:06+00:00",
+        "fetched_at": "2026-09-12T00:01:17+00:00",
         "geom_precision": "route-interp"
       },
       "geometry": {
@@ -4059,7 +4059,7 @@
         "news_category": 4,
         "parse_warnings": [],
         "id": "89c70ee6355f",
-        "fetched_at": "2026-09-11T18:23:06+00:00",
+        "fetched_at": "2026-09-12T00:01:17+00:00",
         "geom_precision": "route-interp"
       },
       "geometry": {
@@ -4089,7 +4089,7 @@
         "from_km": "93K+530",
         "to_km": "93K+530",
         "type": "construction",
-        "status": "scheduled",
+        "status": "active",
         "title": "台21線雙向93K+530陳有蘭溪橋路段，於橋下進行橋墩整建工作。",
         "summary": "台21線雙向93K+530陳有蘭溪橋路段",
         "description": "台21線雙向93K+530陳有蘭溪橋路段，自115年9月12日當日8時起至17時止，於橋下進行橋墩整建工作，不影響道路通行，無占用車道，無交維工作，請注意路況小心駕駛。",
@@ -4102,7 +4102,7 @@
         "news_category": 4,
         "parse_warnings": [],
         "id": "790f59c6b28f",
-        "fetched_at": "2026-09-11T18:23:06+00:00",
+        "fetched_at": "2026-09-12T00:01:17+00:00",
         "geom_precision": "route-interp"
       },
       "geometry": {
@@ -4157,7 +4157,7 @@
         "source_id": "",
         "status": "active",
         "id": "52213d158ad9",
-        "fetched_at": "2026-09-11T18:23:06+00:00",
+        "fetched_at": "2026-09-12T00:01:17+00:00",
         "geom_precision": "route-interp"
       },
       "geometry": {
@@ -5547,7 +5547,7 @@
         "from_km": "122K+000",
         "to_km": "130K+000",
         "type": "construction",
-        "status": "scheduled",
+        "status": "active",
         "title": "台21線雙向122K至130K栓而明隧道路段，於全車道進行沿線護坡工作。",
         "summary": "台21線雙向122K至130K栓而明隧道路段",
         "description": "台21線雙向122K至130K栓而明隧道路段，自115年9月12日當日8時起至17時止，於全車道進行沿線護坡工作，採移動性施工，現場交管維持單線雙向機動管制通行，請注意路況並小心駕駛。",
@@ -5560,7 +5560,7 @@
         "news_category": 4,
         "parse_warnings": [],
         "id": "98589a418499",
-        "fetched_at": "2026-09-11T18:23:06+00:00",
+        "fetched_at": "2026-09-12T00:01:17+00:00",
         "geom_precision": "route-interp"
       },
       "geometry": {
@@ -5930,7 +5930,7 @@
         "news_category": 4,
         "parse_warnings": [],
         "id": "4a027115a62a",
-        "fetched_at": "2026-09-11T18:23:06+00:00",
+        "fetched_at": "2026-09-12T00:01:17+00:00",
         "geom_precision": "route-interp"
       },
       "geometry": {

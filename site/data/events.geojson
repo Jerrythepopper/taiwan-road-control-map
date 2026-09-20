@@ -1,16 +1,16 @@
 {
   "type": "FeatureCollection",
   "meta": {
-    "generated_at": "2026-09-19T10:41:06+00:00",
+    "generated_at": "2026-09-20T00:53:29+00:00",
     "sources": [
       {
         "name": "TDX 路況資訊v2 Live/News/Highway",
-        "fetched_at": "2026-09-19T10:41:03+00:00",
+        "fetched_at": "2026-09-20T00:53:26+00:00",
         "count": 22
       },
       {
         "name": "scripts/manual_rules.json（人工維護常態規則）",
-        "fetched_at": "2026-09-19T10:41:03+00:00",
+        "fetched_at": "2026-09-20T00:53:26+00:00",
         "count": 1
       }
     ]
@@ -25,7 +25,7 @@
         "from_km": "26K+500",
         "to_km": "32K+500",
         "type": "construction",
-        "status": "scheduled",
+        "status": "active",
         "title": "台18線雙向26K+500至32K+500舉辦自行車活動",
         "summary": "台18線雙向26K+500至32K+500",
         "description": "台18線雙向26K+500至32K+500，舉辦「2026嘉義瘋單車大集合雙潭騎跡~嘉義瘋單車」自行車活動，於115年9月20日5時30分至13時止，活動期間實施交通管制，敬請用路人依管制路線配合行駛。",
@@ -38,7 +38,7 @@
         "news_category": 1,
         "parse_warnings": [],
         "id": "e2d688a40c59",
-        "fetched_at": "2026-09-19T10:41:03+00:00",
+        "fetched_at": "2026-09-20T00:53:26+00:00",
         "geom_precision": "route-interp"
       },
       "geometry": {
@@ -321,7 +321,7 @@
         "news_category": 4,
         "parse_warnings": [],
         "id": "5fb81aed2989",
-        "fetched_at": "2026-09-19T10:41:03+00:00",
+        "fetched_at": "2026-09-20T00:53:26+00:00",
         "geom_precision": "route-interp"
       },
       "geometry": {
@@ -372,7 +372,7 @@
         "news_category": 4,
         "parse_warnings": [],
         "id": "2b3ba2fae793",
-        "fetched_at": "2026-09-19T10:41:03+00:00",
+        "fetched_at": "2026-09-20T00:53:26+00:00",
         "geom_precision": "route-interp"
       },
       "geometry": {
@@ -427,7 +427,7 @@
         "news_category": 4,
         "parse_warnings": [],
         "id": "9e16049cdef1",
-        "fetched_at": "2026-09-19T10:41:03+00:00",
+        "fetched_at": "2026-09-20T00:53:26+00:00",
         "geom_precision": "route-interp"
       },
       "geometry": {
@@ -518,7 +518,7 @@
         "news_category": 4,
         "parse_warnings": [],
         "id": "5c99a7dbefe2",
-        "fetched_at": "2026-09-19T10:41:03+00:00",
+        "fetched_at": "2026-09-20T00:53:26+00:00",
         "geom_precision": "route-interp"
       },
       "geometry": {
@@ -645,7 +645,7 @@
         "news_category": 4,
         "parse_warnings": [],
         "id": "c27d5899260d",
-        "fetched_at": "2026-09-19T10:41:03+00:00",
+        "fetched_at": "2026-09-20T00:53:26+00:00",
         "geom_precision": "route-interp"
       },
       "geometry": {
@@ -688,7 +688,7 @@
         "news_category": 4,
         "parse_warnings": [],
         "id": "14f86e53b2ac",
-        "fetched_at": "2026-09-19T10:41:03+00:00",
+        "fetched_at": "2026-09-20T00:53:26+00:00",
         "geom_precision": "route-interp"
       },
       "geometry": {
@@ -775,7 +775,7 @@
         "news_category": 4,
         "parse_warnings": [],
         "id": "081624125f91",
-        "fetched_at": "2026-09-19T10:41:03+00:00",
+        "fetched_at": "2026-09-20T00:53:26+00:00",
         "geom_precision": "route-interp"
       },
       "geometry": {
@@ -822,7 +822,7 @@
         "news_category": 4,
         "parse_warnings": [],
         "id": "1b6c269169da",
-        "fetched_at": "2026-09-19T10:41:03+00:00",
+        "fetched_at": "2026-09-20T00:53:26+00:00",
         "geom_precision": "route-interp"
       },
       "geometry": {
@@ -893,7 +893,7 @@
         "news_category": 4,
         "parse_warnings": [],
         "id": "6b3efea03560",
-        "fetched_at": "2026-09-19T10:41:03+00:00",
+        "fetched_at": "2026-09-20T00:53:26+00:00",
         "geom_precision": "route-interp"
       },
       "geometry": {
@@ -944,7 +944,7 @@
         "news_category": 4,
         "parse_warnings": [],
         "id": "600f760b816a",
-        "fetched_at": "2026-09-19T10:41:03+00:00",
+        "fetched_at": "2026-09-20T00:53:26+00:00",
         "geom_precision": "route-interp"
       },
       "geometry": {
@@ -1307,7 +1307,7 @@
         "news_category": 4,
         "parse_warnings": [],
         "id": "109b153c592a",
-        "fetched_at": "2026-09-19T10:41:03+00:00",
+        "fetched_at": "2026-09-20T00:53:26+00:00",
         "geom_precision": "route-interp"
       },
       "geometry": {
@@ -1379,7 +1379,7 @@
         "news_category": 4,
         "parse_warnings": [],
         "id": "7c715a9a62ee",
-        "fetched_at": "2026-09-19T10:41:03+00:00",
+        "fetched_at": "2026-09-20T00:53:26+00:00",
         "geom_precision": "route-interp"
       },
       "geometry": {
@@ -1439,7 +1439,7 @@
         "news_category": 4,
         "parse_warnings": [],
         "id": "aad2e5e4a3db",
-        "fetched_at": "2026-09-19T10:41:03+00:00",
+        "fetched_at": "2026-09-20T00:53:26+00:00",
         "geom_precision": "route-interp"
       },
       "geometry": {
@@ -1522,7 +1522,7 @@
         "news_category": 4,
         "parse_warnings": [],
         "id": "63a36e1bd542",
-        "fetched_at": "2026-09-19T10:41:03+00:00",
+        "fetched_at": "2026-09-20T00:53:26+00:00",
         "geom_precision": "route-interp"
       },
       "geometry": {
@@ -1605,7 +1605,7 @@
         "news_category": 4,
         "parse_warnings": [],
         "id": "79c2f06006e5",
-        "fetched_at": "2026-09-19T10:41:03+00:00",
+        "fetched_at": "2026-09-20T00:53:26+00:00",
         "geom_precision": "route-interp"
       },
       "geometry": {
@@ -1660,7 +1660,7 @@
         "news_category": 1,
         "parse_warnings": [],
         "id": "d23a3534f110",
-        "fetched_at": "2026-09-19T10:41:03+00:00",
+        "fetched_at": "2026-09-20T00:53:26+00:00",
         "geom_precision": "route-interp"
       },
       "geometry": {
@@ -1707,7 +1707,7 @@
         "news_category": 1,
         "parse_warnings": [],
         "id": "a33daafa85c7",
-        "fetched_at": "2026-09-19T10:41:03+00:00",
+        "fetched_at": "2026-09-20T00:53:26+00:00",
         "geom_precision": "route-interp"
       },
       "geometry": {
@@ -2489,7 +2489,7 @@
         "from_km": "60K+300",
         "to_km": "61K+800",
         "type": "construction",
-        "status": "scheduled",
+        "status": "active",
         "title": "台21線雙向60K+300至61K+800九龍口至朝霧碼頭路段及台21甲線雙向2K+100至20K+833孔雀園岔路口至頭社派出所路段，進行2026日月潭國際萬人泳渡活動。",
         "summary": "台21線雙向60K+300至61K+800九龍口至朝霧碼頭路段及台21甲線雙向2K+100至20K+833孔雀園岔路口至…",
         "description": "台21線雙向60K+300至61K+800九龍口至朝霧碼頭路段及台21甲線雙向2K+100至20K+833孔雀園岔路口至頭社派出所路段，自115年9月20日當日6時起至14時止，進行2026日月潭國際萬人泳渡活動，活動期間所有車輛依順時鐘方向行駛環潭公路，部分路段實施禁止路邊停車管制，並台21線雙向60K+300至60K+500視情況實施調撥車道管制通行，請用路人配合現場人員管制措施，當日視活動狀況調整管制時程。",
@@ -2502,7 +2502,7 @@
         "news_category": 1,
         "parse_warnings": [],
         "id": "05c31bce40b5",
-        "fetched_at": "2026-09-19T10:41:03+00:00",
+        "fetched_at": "2026-09-20T00:53:26+00:00",
         "geom_precision": "route-interp"
       },
       "geometry": {
@@ -2597,7 +2597,7 @@
         "news_category": 1,
         "parse_warnings": [],
         "id": "f9162ac5bb96",
-        "fetched_at": "2026-09-19T10:41:03+00:00",
+        "fetched_at": "2026-09-20T00:53:26+00:00",
         "geom_precision": "route-interp"
       },
       "geometry": {
@@ -3228,7 +3228,7 @@
         "news_category": 4,
         "parse_warnings": [],
         "id": "89c70ee6355f",
-        "fetched_at": "2026-09-19T10:41:03+00:00",
+        "fetched_at": "2026-09-20T00:53:26+00:00",
         "geom_precision": "route-interp"
       },
       "geometry": {
@@ -3279,7 +3279,7 @@
         "source_id": "",
         "status": "active",
         "id": "52213d158ad9",
-        "fetched_at": "2026-09-19T10:41:03+00:00",
+        "fetched_at": "2026-09-20T00:53:26+00:00",
         "geom_precision": "route-interp"
       },
       "geometry": {
@@ -4697,7 +4697,7 @@
         "news_category": 4,
         "parse_warnings": [],
         "id": "4a027115a62a",
-        "fetched_at": "2026-09-19T10:41:03+00:00",
+        "fetched_at": "2026-09-20T00:53:26+00:00",
         "geom_precision": "route-interp"
       },
       "geometry": {

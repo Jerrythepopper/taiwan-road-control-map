@@ -1,16 +1,16 @@
 {
   "type": "FeatureCollection",
   "meta": {
-    "generated_at": "2026-10-22T23:08:26+00:00",
+    "generated_at": "2026-10-23T04:16:49+00:00",
     "sources": [
       {
         "name": "TDX 路況資訊v2 Live/News/Highway",
-        "fetched_at": "2026-10-22T23:08:23+00:00",
+        "fetched_at": "2026-10-23T04:16:47+00:00",
         "count": 13
       },
       {
         "name": "scripts/manual_rules.json（人工維護常態規則）",
-        "fetched_at": "2026-10-22T23:08:23+00:00",
+        "fetched_at": "2026-10-23T04:16:47+00:00",
         "count": 1
       }
     ]
@@ -38,7 +38,7 @@
         "news_category": 4,
         "parse_warnings": [],
         "id": "081624125f91",
-        "fetched_at": "2026-10-22T23:08:23+00:00",
+        "fetched_at": "2026-10-23T04:16:47+00:00",
         "geom_precision": "route-interp"
       },
       "geometry": {
@@ -85,7 +85,7 @@
         "news_category": 4,
         "parse_warnings": [],
         "id": "1b6c269169da",
-        "fetched_at": "2026-10-22T23:08:23+00:00",
+        "fetched_at": "2026-10-23T04:16:47+00:00",
         "geom_precision": "route-interp"
       },
       "geometry": {
@@ -173,7 +173,7 @@
         "news_category": 4,
         "parse_warnings": [],
         "id": "7c715a9a62ee",
-        "fetched_at": "2026-10-22T23:08:23+00:00",
+        "fetched_at": "2026-10-23T04:16:47+00:00",
         "geom_precision": "route-interp"
       },
       "geometry": {
@@ -203,7 +203,7 @@
         "from_km": "96K+000",
         "to_km": "108K+200",
         "type": "construction",
-        "status": "scheduled",
+        "status": "active",
         "title": "台18線雙向96K至108K+200自忠至塔塔加停車場路段，於內外車道進行交安及牌面設施施作、標線作業。",
         "summary": "台18線雙向96K至108K+200自忠至塔塔加停車場路段",
         "description": "台18線雙向96K至108K+200自忠至塔塔加停車場路段，自115年10月23日當日8時起至20時止，於內外車道進行交安及牌面設施施作、標線作業，採移動性施工，現場交管維持單線雙向機動管制通行，請注意路況並小心駕駛。",
@@ -216,7 +216,7 @@
         "news_category": 4,
         "parse_warnings": [],
         "id": "f002fb3c6eaa",
-        "fetched_at": "2026-10-22T23:08:23+00:00",
+        "fetched_at": "2026-10-23T04:16:47+00:00",
         "geom_precision": "route-interp"
       },
       "geometry": {
@@ -743,7 +743,7 @@
           "公告解析不到里程，geometry 留 null"
         ],
         "id": "7b0c2082d684",
-        "fetched_at": "2026-10-22T23:08:23+00:00",
+        "fetched_at": "2026-10-23T04:16:47+00:00",
         "geom_precision": "unknown"
       },
       "geometry": null
@@ -757,7 +757,7 @@
         "from_km": "33K+000",
         "to_km": "36K+000",
         "type": "construction",
-        "status": "scheduled",
+        "status": "active",
         "title": "台21線雙向33K至36K埔里路段，於全車道進行路容清理及災害搶修工作。",
         "summary": "台21線雙向33K至36K埔里路段",
         "description": "台21線雙向33K至36K埔里路段，自115年10月23日當日8時起至17時止，於全車道進行路容清理及災害搶修工作，採移動性施工，請注意路況並小心駕駛。",
@@ -770,7 +770,7 @@
         "news_category": 4,
         "parse_warnings": [],
         "id": "28ea7112bc9f",
-        "fetched_at": "2026-10-22T23:08:23+00:00",
+        "fetched_at": "2026-10-23T04:16:47+00:00",
         "geom_precision": "route-interp"
       },
       "geometry": {
@@ -912,7 +912,7 @@
         "from_km": "53K+000",
         "to_km": "67K+000",
         "type": "construction",
-        "status": "scheduled",
+        "status": "active",
         "title": "台21線雙向53K至67K埔里至魚池路段，於全車道進行照明施作。",
         "summary": "台21線雙向53K至67K埔里至魚池路段",
         "description": "台21線雙向53K至67K埔里至魚池路段，自115年10月23日當日8時起至18時止，於全車道進行照明施作，採移動性施工，請注意路況並小心駕駛。",
@@ -925,7 +925,7 @@
         "news_category": 4,
         "parse_warnings": [],
         "id": "aa8ca00e021d",
-        "fetched_at": "2026-10-22T23:08:23+00:00",
+        "fetched_at": "2026-10-23T04:16:47+00:00",
         "geom_precision": "route-interp"
       },
       "geometry": {
@@ -1507,7 +1507,7 @@
         "from_km": "68K+500",
         "to_km": "142K+500",
         "type": "construction",
-        "status": "scheduled",
+        "status": "active",
         "title": "台21線雙向68K+500至142K+500頭社派出所至夫妻樹路段，於內外車道進行交安及牌面設施施作、標線作業。",
         "summary": "台21線雙向68K+500至142K+500頭社派出所至夫妻樹路段",
         "description": "台21線雙向68K+500至142K+500頭社派出所至夫妻樹路段，自115年10月23日當日8時起至20時止，於內外車道進行交安及牌面設施施作、標線作業，採移動性施工，現場交管維持單線雙向機動管制通行，請注意路況並小心駕駛。",
@@ -1520,7 +1520,7 @@
         "news_category": 4,
         "parse_warnings": [],
         "id": "257a9665e290",
-        "fetched_at": "2026-10-22T23:08:23+00:00",
+        "fetched_at": "2026-10-23T04:16:47+00:00",
         "geom_precision": "route-interp"
       },
       "geometry": {
@@ -4502,7 +4502,7 @@
         "from_km": "69K+985",
         "to_km": "69K+985",
         "type": "construction",
-        "status": "scheduled",
+        "status": "active",
         "title": "台21線雙向69K+985頭社派出所路段，於全車道進行邊坡自由型框工作，現場交管維持單線雙向機動管制通行",
         "summary": "台21線雙向69K+985頭社派出所路段",
         "description": "台21線雙向69K+985頭社派出所路段，自115年10月23日當日8時起至17時止，於全車道進行邊坡自由型框工作，現場交管維持單線雙向機動管制通行，請注意路況並小心駕駛。",
@@ -4515,7 +4515,7 @@
         "news_category": 4,
         "parse_warnings": [],
         "id": "e3b6fdb85ecf",
-        "fetched_at": "2026-10-22T23:08:23+00:00",
+        "fetched_at": "2026-10-23T04:16:47+00:00",
         "geom_precision": "route-interp"
       },
       "geometry": {
@@ -4549,7 +4549,7 @@
         "from_km": "70K+588",
         "to_km": "70K+588",
         "type": "construction",
-        "status": "scheduled",
+        "status": "active",
         "title": "台21線雙向70K+588日月潭特色遊學中心路段，於全車道進行邊坡自由型框工作，現場交管維持單線雙向機動管制通行",
         "summary": "台21線雙向70K+588日月潭特色遊學中心路段",
         "description": "台21線雙向70K+588日月潭特色遊學中心路段，自115年10月23日當日8時起至17時止，於全車道進行邊坡自由型框工作，現場交管維持單線雙向機動管制通行，請注意路況並小心駕駛。",
@@ -4562,7 +4562,7 @@
         "news_category": 4,
         "parse_warnings": [],
         "id": "948ce9918a6c",
-        "fetched_at": "2026-10-22T23:08:23+00:00",
+        "fetched_at": "2026-10-23T04:16:47+00:00",
         "geom_precision": "route-interp"
       },
       "geometry": {
@@ -4596,7 +4596,7 @@
         "from_km": "102K+000",
         "to_km": "144K+390",
         "type": "construction",
-        "status": "scheduled",
+        "status": "active",
         "title": "台21線雙向102K至144K+390和社森林教育中心至塔塔加路段，於全車道進行割草及構造縫及護坡工作，採移動性施工，現場交管維持單線雙向機動管制通行。",
         "summary": "台21線雙向102K至144K+390和社森林教育中心至塔塔加路段",
         "description": "台21線雙向102K至144K+390和社森林教育中心至塔塔加路段，自115年10月23日當日8時起至17時止，於全車道進行割草及構造縫及護坡工作，採移動性施工，現場交管維持單線雙向機動管制通行，請注意路況小心駕駛。",
@@ -4609,7 +4609,7 @@
         "news_category": 4,
         "parse_warnings": [],
         "id": "6f45306f6391",
-        "fetched_at": "2026-10-22T23:08:23+00:00",
+        "fetched_at": "2026-10-23T04:16:47+00:00",
         "geom_precision": "route-interp"
       },
       "geometry": {
@@ -6327,7 +6327,7 @@
         "from_km": "105K+000",
         "to_km": "116K+100",
         "type": "construction",
-        "status": "scheduled",
+        "status": "active",
         "title": "台21線雙向105K至116K+100隆華新橋至望高隧道路段，於全車道進行落石防護柵工程。",
         "summary": "台21線雙向105K至116K+100隆華新橋至望高隧道路段",
         "description": "台21線雙向105K至116K+100隆華新橋至望高隧道路段，自115年10月23日當日8時起至17時止，於全車道進行落石防護柵工程，現場交管維持單線雙向機動管制通行，請注意路況並小心駕駛。",
@@ -6340,7 +6340,7 @@
         "news_category": 4,
         "parse_warnings": [],
         "id": "c2643b937edd",
-        "fetched_at": "2026-10-22T23:08:23+00:00",
+        "fetched_at": "2026-10-23T04:16:47+00:00",
         "geom_precision": "route-interp"
       },
       "geometry": {
@@ -6827,7 +6827,7 @@
         "source_id": "",
         "status": "active",
         "id": "52213d158ad9",
-        "fetched_at": "2026-10-22T23:08:23+00:00",
+        "fetched_at": "2026-10-23T04:16:47+00:00",
         "geom_precision": "route-interp"
       },
       "geometry": {
@@ -8217,7 +8217,7 @@
         "from_km": "116K+100",
         "to_km": "121K+550",
         "type": "construction",
-        "status": "scheduled",
+        "status": "active",
         "title": "台21線雙向116K+100至121K+550望高隧道至玉山觀峰景點路段，於全車道進行邊坡自由型框工作。",
         "summary": "台21線雙向116K+100至121K+550望高隧道至玉山觀峰景點路段",
         "description": "台21線雙向116K+100至121K+550望高隧道至玉山觀峰景點路段，自115年10月23日當日8時起至17時止，於全車道進行邊坡自由型框工作，現場交管維持單線雙向機動管制通行，請注意路況並小心駕駛。",
@@ -8230,7 +8230,7 @@
         "news_category": 4,
         "parse_warnings": [],
         "id": "38a8bc836746",
-        "fetched_at": "2026-10-22T23:08:23+00:00",
+        "fetched_at": "2026-10-23T04:16:47+00:00",
         "geom_precision": "route-interp"
       },
       "geometry": {

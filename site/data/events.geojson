@@ -1,16 +1,16 @@
 {
   "type": "FeatureCollection",
   "meta": {
-    "generated_at": "2026-11-18T21:15:13+00:00",
+    "generated_at": "2026-11-19T03:03:31+00:00",
     "sources": [
       {
         "name": "TDX 路況資訊v2 Live/News/Highway",
-        "fetched_at": "2026-11-18T21:15:11+00:00",
+        "fetched_at": "2026-11-19T03:03:29+00:00",
         "count": 32
       },
       {
         "name": "scripts/manual_rules.json（人工維護常態規則）",
-        "fetched_at": "2026-11-18T21:15:11+00:00",
+        "fetched_at": "2026-11-19T03:03:29+00:00",
         "count": 1
       }
     ]
@@ -55,7 +55,7 @@
         "news_category": 4,
         "parse_warnings": [],
         "id": "38ad9fa800b4",
-        "fetched_at": "2026-11-18T21:15:11+00:00",
+        "fetched_at": "2026-11-19T03:03:29+00:00",
         "geom_precision": "route-interp"
       },
       "geometry": {
@@ -362,7 +362,7 @@
         "news_category": 4,
         "parse_warnings": [],
         "id": "2b3ba2fae793",
-        "fetched_at": "2026-11-18T21:15:11+00:00",
+        "fetched_at": "2026-11-19T03:03:29+00:00",
         "geom_precision": "route-interp"
       },
       "geometry": {
@@ -417,7 +417,7 @@
         "news_category": 4,
         "parse_warnings": [],
         "id": "9e16049cdef1",
-        "fetched_at": "2026-11-18T21:15:11+00:00",
+        "fetched_at": "2026-11-19T03:03:29+00:00",
         "geom_precision": "route-interp"
       },
       "geometry": {
@@ -500,7 +500,7 @@
         "news_category": 4,
         "parse_warnings": [],
         "id": "14f86e53b2ac",
-        "fetched_at": "2026-11-18T21:15:11+00:00",
+        "fetched_at": "2026-11-19T03:03:29+00:00",
         "geom_precision": "route-interp"
       },
       "geometry": {
@@ -574,7 +574,7 @@
         "from_km": "50K+300",
         "to_km": "77K+400",
         "type": "timed",
-        "status": "active",
+        "status": "ended",
         "title": "台18線雙向50K+300至77K+400路面刨除加封施工。",
         "summary": "台18線雙向50K+300至77K+400施工",
         "description": "台18線雙向50K+300至77K+400施工，自115年11月18日起至12月2日止，每日7時至19時，採半半施工，機動管制車道輪流放行(例假日不施作)。",
@@ -595,7 +595,7 @@
         "news_category": 4,
         "parse_warnings": [],
         "id": "129af25526df",
-        "fetched_at": "2026-11-18T21:15:11+00:00",
+        "fetched_at": "2026-11-19T03:03:29+00:00",
         "geom_precision": "route-interp"
       },
       "geometry": {
@@ -1714,7 +1714,7 @@
         "news_category": 4,
         "parse_warnings": [],
         "id": "081624125f91",
-        "fetched_at": "2026-11-18T21:15:11+00:00",
+        "fetched_at": "2026-11-19T03:03:29+00:00",
         "geom_precision": "route-interp"
       },
       "geometry": {
@@ -1761,7 +1761,7 @@
         "news_category": 4,
         "parse_warnings": [],
         "id": "1b6c269169da",
-        "fetched_at": "2026-11-18T21:15:11+00:00",
+        "fetched_at": "2026-11-19T03:03:29+00:00",
         "geom_precision": "route-interp"
       },
       "geometry": {
@@ -1840,7 +1840,7 @@
         "news_category": 4,
         "parse_warnings": [],
         "id": "6b3efea03560",
-        "fetched_at": "2026-11-18T21:15:11+00:00",
+        "fetched_at": "2026-11-19T03:03:29+00:00",
         "geom_precision": "route-interp"
       },
       "geometry": {
@@ -1899,7 +1899,7 @@
         "news_category": 4,
         "parse_warnings": [],
         "id": "109b153c592a",
-        "fetched_at": "2026-11-18T21:15:11+00:00",
+        "fetched_at": "2026-11-19T03:03:29+00:00",
         "geom_precision": "route-interp"
       },
       "geometry": {
@@ -1971,7 +1971,7 @@
         "news_category": 4,
         "parse_warnings": [],
         "id": "7c715a9a62ee",
-        "fetched_at": "2026-11-18T21:15:11+00:00",
+        "fetched_at": "2026-11-19T03:03:29+00:00",
         "geom_precision": "route-interp"
       },
       "geometry": {
@@ -2022,7 +2022,7 @@
         "news_category": 4,
         "parse_warnings": [],
         "id": "7406eff54e96",
-        "fetched_at": "2026-11-18T21:15:11+00:00",
+        "fetched_at": "2026-11-19T03:03:29+00:00",
         "geom_precision": "route-interp"
       },
       "geometry": {
@@ -2082,7 +2082,7 @@
         "news_category": 4,
         "parse_warnings": [],
         "id": "338c0da871b7",
-        "fetched_at": "2026-11-18T21:15:11+00:00",
+        "fetched_at": "2026-11-19T03:03:29+00:00",
         "geom_precision": "route-interp"
       },
       "geometry": {
@@ -2241,7 +2241,7 @@
         "news_category": 4,
         "parse_warnings": [],
         "id": "f3c12baed111",
-        "fetched_at": "2026-11-18T21:15:11+00:00",
+        "fetched_at": "2026-11-19T03:03:29+00:00",
         "geom_precision": "route-interp"
       },
       "geometry": {
@@ -2745,7 +2745,7 @@
         "news_category": 4,
         "parse_warnings": [],
         "id": "bfa928e68384",
-        "fetched_at": "2026-11-18T21:15:11+00:00",
+        "fetched_at": "2026-11-19T03:03:29+00:00",
         "geom_precision": "route-interp"
       },
       "geometry": {
@@ -2813,7 +2813,7 @@
         "news_category": 4,
         "parse_warnings": [],
         "id": "076f0759d799",
-        "fetched_at": "2026-11-18T21:15:11+00:00",
+        "fetched_at": "2026-11-19T03:03:29+00:00",
         "geom_precision": "route-interp"
       },
       "geometry": {
@@ -2877,7 +2877,7 @@
         "news_category": 4,
         "parse_warnings": [],
         "id": "0434b666300f",
-        "fetched_at": "2026-11-18T21:15:11+00:00",
+        "fetched_at": "2026-11-19T03:03:29+00:00",
         "geom_precision": "route-interp"
       },
       "geometry": {
@@ -2935,7 +2935,7 @@
         "from_km": "61K+000",
         "to_km": "61K+000",
         "type": "construction",
-        "status": "scheduled",
+        "status": "active",
         "title": "台21線南下61K朝霧橋路段，於外側車道進行橋梁維修改善工程。",
         "summary": "台21線南下61K朝霧橋路段",
         "description": "台21線南下61K朝霧橋路段，自115年11月19日當日8時起至17時止，於外側車道進行橋梁維修改善工程，現場交管維持單線雙向機動管制通行，請注意路況並小心駕駛。",
@@ -2948,7 +2948,7 @@
         "news_category": 4,
         "parse_warnings": [],
         "id": "afd7d0513e64",
-        "fetched_at": "2026-11-18T21:15:11+00:00",
+        "fetched_at": "2026-11-19T03:03:29+00:00",
         "geom_precision": "route-interp"
       },
       "geometry": {
@@ -2999,7 +2999,7 @@
         "news_category": 4,
         "parse_warnings": [],
         "id": "2df6cbd64e7f",
-        "fetched_at": "2026-11-18T21:15:11+00:00",
+        "fetched_at": "2026-11-19T03:03:29+00:00",
         "geom_precision": "route-interp"
       },
       "geometry": {
@@ -3061,7 +3061,7 @@
         "from_km": "65K+000",
         "to_km": "68K+500",
         "type": "construction",
-        "status": "scheduled",
+        "status": "active",
         "title": "台21線雙向65K至68K+500頭社路段，於全車道進行路容清理工作。",
         "summary": "台21線雙向65K至68K+500頭社路段",
         "description": "台21線雙向65K至68K+500頭社路段，自115年11月19日當日7時起至18時止，於全車道進行路容清理工作，採單線機動管制，請注意路況並小心駕駛。",
@@ -3074,7 +3074,7 @@
         "news_category": 4,
         "parse_warnings": [],
         "id": "e03229f604c2",
-        "fetched_at": "2026-11-18T21:15:11+00:00",
+        "fetched_at": "2026-11-19T03:03:29+00:00",
         "geom_precision": "route-interp"
       },
       "geometry": {
@@ -3257,7 +3257,7 @@
         "news_category": 4,
         "parse_warnings": [],
         "id": "09ac28d8da0e",
-        "fetched_at": "2026-11-18T21:15:11+00:00",
+        "fetched_at": "2026-11-19T03:03:29+00:00",
         "geom_precision": "route-interp"
       },
       "geometry": {
@@ -3318,7 +3318,7 @@
           "里程 500K+000 超過 台21線 折線終點 145K+035，已 clamp（segment 終點）"
         ],
         "id": "80c5cef1566b",
-        "fetched_at": "2026-11-18T21:15:11+00:00",
+        "fetched_at": "2026-11-19T03:03:29+00:00",
         "geom_precision": "route-interp"
       },
       "geometry": {
@@ -6400,7 +6400,7 @@
         "from_km": "68K+604",
         "to_km": "144K+390",
         "type": "construction",
-        "status": "scheduled",
+        "status": "active",
         "title": "台21線雙向68K+604至144K+390玉頭社派出所至塔塔加路段，於外車道進行割草、構造縫、明溝、隧道、標誌清洗作業。",
         "summary": "台21線雙向68K+604至144K+390玉頭社派出所至塔塔加路段",
         "description": "台21線雙向68K+604至144K+390玉頭社派出所至塔塔加路段，自115年11月19日當日8時起至17時止，於外車道進行割草、構造縫、明溝、隧道、標誌清洗作業，採移動性施工，現場交管維持單線雙向機動管制通行，請注意路況並小心駕駛。",
@@ -6413,7 +6413,7 @@
         "news_category": 4,
         "parse_warnings": [],
         "id": "dc593a62bdf3",
-        "fetched_at": "2026-11-18T21:15:11+00:00",
+        "fetched_at": "2026-11-19T03:03:29+00:00",
         "geom_precision": "route-interp"
       },
       "geometry": {
@@ -9467,7 +9467,7 @@
         "from_km": "70K+000",
         "to_km": "124K+000",
         "type": "construction",
-        "status": "scheduled",
+        "status": "active",
         "title": "台21線南下70K至124K頭社派出所至大勇橋路段，於外車道進行公路維修工程。",
         "summary": "台21線南下70K至124K頭社派出所至大勇橋路段",
         "description": "台21線南下70K至124K頭社派出所至大勇橋路段，自115年11月19日當日8時起至17時止，於外車道進行公路維修工程，採移動性施工，現場交管維持單線雙向機動管制通行，請注意路況並小心駕駛。",
@@ -9480,7 +9480,7 @@
         "news_category": 4,
         "parse_warnings": [],
         "id": "4445bbf3d68e",
-        "fetched_at": "2026-11-18T21:15:11+00:00",
+        "fetched_at": "2026-11-19T03:03:29+00:00",
         "geom_precision": "route-interp"
       },
       "geometry": {
@@ -11662,7 +11662,7 @@
         "from_km": "70K+588",
         "to_km": "69K+985",
         "type": "construction",
-        "status": "scheduled",
+        "status": "active",
         "title": "台21線北上70K+588至69K+985頭社派出所路段，於全車道進行邊坡自由型框工程。",
         "summary": "台21線北上70K+588至69K+985頭社派出所路段",
         "description": "台21線北上70K+588至69K+985頭社派出所路段，自115年11月19日當日8時起至17時止，於外車道進行邊坡自由型框工程，現場交管維持單線雙向機動管制通行，請注意路況並小心駕駛。",
@@ -11675,7 +11675,7 @@
         "news_category": 4,
         "parse_warnings": [],
         "id": "9e30f7421b6c",
-        "fetched_at": "2026-11-18T21:15:11+00:00",
+        "fetched_at": "2026-11-19T03:03:29+00:00",
         "geom_precision": "route-interp"
       },
       "geometry": {
@@ -11725,7 +11725,7 @@
         "from_km": "72K+912",
         "to_km": "72K+912",
         "type": "construction",
-        "status": "scheduled",
+        "status": "active",
         "title": "台21線北上72K+912大坪林路段，於外側車道進行邊坡自由型框工程。",
         "summary": "台21線北上72K+912大坪林路段",
         "description": "台21線北上72K+912大坪林路段，自115年11月19日當日8時起至17時止，於外側車道進行邊坡自由型框工程，現場交管維持單線雙向機動管制通行，請注意路況並小心駕駛。",
@@ -11738,7 +11738,7 @@
         "news_category": 4,
         "parse_warnings": [],
         "id": "80d5332bc5d1",
-        "fetched_at": "2026-11-18T21:15:11+00:00",
+        "fetched_at": "2026-11-19T03:03:29+00:00",
         "geom_precision": "route-interp"
       },
       "geometry": {
@@ -11785,7 +11785,7 @@
         "news_category": 4,
         "parse_warnings": [],
         "id": "89c70ee6355f",
-        "fetched_at": "2026-11-18T21:15:11+00:00",
+        "fetched_at": "2026-11-19T03:03:29+00:00",
         "geom_precision": "route-interp"
       },
       "geometry": {
@@ -11813,12 +11813,12 @@
         "road": "台21線",
         "direction": "雙向",
         "from_km": "93K+530",
-        "to_km": "93K+714",
+        "to_km": "93K+806",
         "type": "construction",
-        "status": "scheduled",
-        "title": "台21線雙向93K+530至93K+714陳有蘭溪橋路段，於橋下進行橋墩整建工作。",
-        "summary": "台21線雙向93K+530至93K+714陳有蘭溪橋路段",
-        "description": "台21線雙向93K+530至93K+714陳有蘭溪橋路段，自115年11月19日當日8時起至17時止，於橋下進行橋墩整建工作，無占用車道，無交維管制，請注意路況並小心駕駛。",
+        "status": "active",
+        "title": "台21線雙向93K+530至93K+806陳有蘭溪橋路段，於橋下進行橋墩整建工作。",
+        "summary": "台21線雙向93K+530至93K+806陳有蘭溪橋路段",
+        "description": "台21線雙向93K+530至93K+806陳有蘭溪橋路段，自115年11月19日當日8時起至17時止，於橋下進行橋墩整建工作，無占用車道，無交維管制，請注意路況並小心駕駛。",
         "schedule": "",
         "rules": [],
         "start_date": "2026-11-19",
@@ -11827,8 +11827,8 @@
         "source_url": "https://168.thb.gov.tw/",
         "news_category": 4,
         "parse_warnings": [],
-        "id": "b65cb81b0b11",
-        "fetched_at": "2026-11-18T21:15:11+00:00",
+        "id": "c95b6ca7b964",
+        "fetched_at": "2026-11-19T03:03:29+00:00",
         "geom_precision": "route-interp"
       },
       "geometry": {
@@ -11847,8 +11847,12 @@
             23.65978
           ],
           [
-            120.879058,
-            23.659678
+            120.879546,
+            23.659053
+          ],
+          [
+            120.87958,
+            23.659009
           ]
         ]
       }
@@ -11862,7 +11866,7 @@
         "from_km": "95K+108",
         "to_km": "95K+180",
         "type": "construction",
-        "status": "scheduled",
+        "status": "active",
         "title": "台21線雙向95K+108至95K+180筆石橋路段，於橋下進行橋墩整建工作。",
         "summary": "台21線雙向95K+108至95K+180筆石橋路段",
         "description": "台21線雙向95K+108至95K+180筆石橋路段，自115年11月19日當日8時起至17時止，於橋下進行橋墩整建工作，無占用車道，無交維管制，請注意路況並小心駕駛。",
@@ -11875,7 +11879,7 @@
         "news_category": 4,
         "parse_warnings": [],
         "id": "0c3e79cfdb97",
-        "fetched_at": "2026-11-18T21:15:11+00:00",
+        "fetched_at": "2026-11-19T03:03:29+00:00",
         "geom_precision": "route-interp"
       },
       "geometry": {
@@ -11901,7 +11905,7 @@
         "from_km": "108K+000",
         "to_km": "113K+000",
         "type": "construction",
-        "status": "scheduled",
+        "status": "active",
         "title": "台21線北上108K至113K神和橋至單吉娜橋路段，於全車道進行喬木修剪工作。",
         "summary": "台21線北上108K至113K神和橋至單吉娜橋路段",
         "description": "台21線北上108K至113K神和橋至單吉娜橋路段，自115年11月19日當日10時起至17時止，於全車道進行喬木修剪工作，採移動性施工，現場交管維持單線雙向機動管制通行，請注意路況並小心駕駛。",
@@ -11914,7 +11918,7 @@
         "news_category": 4,
         "parse_warnings": [],
         "id": "398f6067a63c",
-        "fetched_at": "2026-11-18T21:15:11+00:00",
+        "fetched_at": "2026-11-19T03:03:29+00:00",
         "geom_precision": "route-interp"
       },
       "geometry": {
@@ -12157,7 +12161,7 @@
         "source_id": "",
         "status": "active",
         "id": "52213d158ad9",
-        "fetched_at": "2026-11-18T21:15:11+00:00",
+        "fetched_at": "2026-11-19T03:03:29+00:00",
         "geom_precision": "route-interp"
       },
       "geometry": {
@@ -13547,7 +13551,7 @@
         "from_km": "113K+135",
         "to_km": "113K+135",
         "type": "construction",
-        "status": "scheduled",
+        "status": "active",
         "title": "台21線南下113K+135單吉娜明隧道路段，於全車道進行邊坡自由型框工程。",
         "summary": "台21線南下113K+135單吉娜明隧道路段",
         "description": "台21線南下113K+135單吉娜明隧道路段，自115年11月19日當日8時起至17時止，於全車道進行邊坡自由型框工程，現場交管維持單線雙向機動管制通行，請注意路況並小心駕駛。",
@@ -13560,7 +13564,7 @@
         "news_category": 4,
         "parse_warnings": [],
         "id": "be323a9d2799",
-        "fetched_at": "2026-11-18T21:15:11+00:00",
+        "fetched_at": "2026-11-19T03:03:29+00:00",
         "geom_precision": "route-interp"
       },
       "geometry": {
@@ -13594,7 +13598,7 @@
         "from_km": "120K+700",
         "to_km": "120K+700",
         "type": "construction",
-        "status": "scheduled",
+        "status": "active",
         "title": "台21線南下120K+700新中橫監工站路段，於全車道進行邊坡自由型框工程。",
         "summary": "台21線南下120K+700新中橫監工站路段",
         "description": "台21線南下120K+700新中橫監工站路段，自115年11月19日當日8時起至17時止，於全車道進行邊坡自由型框工程，現場交管維持單線雙向機動管制通行，請注意路況並小心駕駛。",
@@ -13607,7 +13611,7 @@
         "news_category": 4,
         "parse_warnings": [],
         "id": "35d6c25c2781",
-        "fetched_at": "2026-11-18T21:15:11+00:00",
+        "fetched_at": "2026-11-19T03:03:29+00:00",
         "geom_precision": "route-interp"
       },
       "geometry": {
@@ -13665,7 +13669,7 @@
         "news_category": 4,
         "parse_warnings": [],
         "id": "4a027115a62a",
-        "fetched_at": "2026-11-18T21:15:11+00:00",
+        "fetched_at": "2026-11-19T03:03:29+00:00",
         "geom_precision": "route-interp"
       },
       "geometry": {
